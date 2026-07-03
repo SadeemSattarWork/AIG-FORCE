@@ -11,16 +11,16 @@ export const metadata: Metadata = {
 };
 
 const steps = [
-  { number: "01", title: "Submit your brief", description: "Tell us the domain, scope, seniority, and timeline. Intake takes under five minutes.", annotation: "brief_received · 4m 32s" },
-  { number: "02", title: "The pipeline runs", description: "Our ATS screens the network against your brief and our AI interviewer scores every candidate on one rubric.", annotation: "candidates_scored · 100%" },
-  { number: "03", title: "Hire from a ranked shortlist", description: "You receive the strongest candidates within 48 hours, each with an evidence-backed scorecard. You make the call.", annotation: "shortlist_ready · 48h" },
+  { number: "01", title: "Submit your brief", description: "Tell us the domain, scope, seniority, and timeline. Intake takes under five minutes." },
+  { number: "02", title: "The pipeline runs", description: "Our ATS screens the network against your brief and our AI interviewer scores every candidate on one rubric." },
+  { number: "03", title: "Hire from a ranked shortlist", description: "You receive the strongest candidates within 48 hours, each with an evidence-backed scorecard. You make the call." },
 ];
 
 const valuePoints = [
   { title: "Rigorous vetting", description: "Every expert passes a multi-stage assessment of domain knowledge, prior work, and references before joining the network." },
   { title: "48-hour matching", description: "The pipeline never sleeps. Most clients receive their ranked shortlist within two business days of submitting a brief." },
-  { title: "Evidence, not vibes", description: "AI interview scorecards give your hiring committee comparable, structured data on every candidate — identical criteria, zero first-impression bias." },
-  { title: "Direct engagement", description: "You talk directly to your expert — no account managers as intermediaries. Faster feedback, faster delivery." },
+  { title: "Evidence, not vibes", description: "AI interview scorecards give your hiring committee comparable, structured data on every candidate, with identical criteria and zero first-impression bias." },
+  { title: "Direct engagement", description: "You talk directly to your expert, with no account managers as intermediaries. Faster feedback, faster delivery." },
 ];
 
 export default function ForCompaniesPage() {
@@ -33,7 +33,7 @@ export default function ForCompaniesPage() {
             Hire elite experts, at <em>machine</em> speed.
           </>
         }
-        lede="Stop settling for generalists. AIG Force runs your entire hiring pipeline — screening, AI interviews, scorecards — and hands you a ranked shortlist of proven specialists."
+        lede="Stop settling for generalists. AIG Force runs your entire hiring pipeline, from screening to AI interviews to scorecards, and hands you a ranked shortlist of proven specialists."
       />
 
       {/* Process */}
@@ -57,11 +57,10 @@ export default function ForCompaniesPage() {
                     <span className="machine text-muted">{step.number}</span>
                     <h3 className="display text-ink text-2xl md:text-3xl">{step.title}</h3>
                   </div>
-                  <div className="sm:pl-12 flex flex-col lg:flex-row lg:items-baseline lg:justify-between gap-3">
-                    <p className="text-sm md:text-base text-muted leading-relaxed max-w-md">
+                  <div className="sm:pl-12">
+                    <p className="text-sm md:text-base text-muted leading-relaxed max-w-xl">
                       {step.description}
                     </p>
-                    <span className="machine text-blue shrink-0">{step.annotation}</span>
                   </div>
                 </li>
               ))}

@@ -4,7 +4,6 @@ import { EditorialIntro } from "@/components/public/home/EditorialIntro";
 import { Pipeline } from "@/components/public/home/Pipeline";
 import { ExpertiseAccordion } from "@/components/public/home/ExpertiseAccordion";
 import { SolutionsPanel } from "@/components/public/home/SolutionsPanel";
-import { Testimonials } from "@/components/public/home/Testimonials";
 import { InsightsGrid } from "@/components/public/home/InsightsGrid";
 import { PreFooterCTA } from "@/components/public/home/PreFooterCTA";
 
@@ -20,7 +19,6 @@ export default function HomePage() {
       <Pipeline />
       <ExpertiseAccordion />
       <SolutionsPanel />
-      <Testimonials />
       <InsightsGrid />
       <PreFooterCTA />
     </>

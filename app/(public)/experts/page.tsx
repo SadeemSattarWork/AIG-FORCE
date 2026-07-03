@@ -7,7 +7,7 @@ import { CTABanner } from "@/components/shared/CTABanner";
 export const metadata: Metadata = {
   title: "Expert Domains",
   description:
-    "Browse AIG Force's expert domains — Biology, Software Engineering, Legal, Medical, and Finance. Every expert is rigorously vetted before joining our network.",
+    "Browse AIG Force's expert domains: Biology, Software Engineering, Legal, Medical, and Finance. Every expert is rigorously vetted before joining our network.",
 };
 
 export default function ExpertsPage() {

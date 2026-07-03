@@ -20,9 +20,9 @@ export async function generateMetadata(props: PageProps<"/experts/[domain]">): P
 }
 
 const hiringSteps = [
-  { number: "01", title: "Submit your brief", description: "Describe the role, required expertise, and timeline.", annotation: "brief_received" },
-  { number: "02", title: "The pipeline runs", description: "Our ATS screens the domain network and our AI interviewer scores every candidate against your brief.", annotation: "shortlist_ready · 48h" },
-  { number: "03", title: "You make the call", description: "Interview the finalists and engage directly — no agency bloat.", annotation: "offer_sent" },
+  { number: "01", title: "Submit your brief", description: "Describe the role, required expertise, and timeline." },
+  { number: "02", title: "The pipeline runs", description: "Our ATS screens the domain network and our AI interviewer scores every candidate against your brief." },
+  { number: "03", title: "You make the call", description: "Interview the finalists and engage directly, with no agency bloat." },
 ];
 
 export default async function DomainPage(props: PageProps<"/experts/[domain]">) {
@@ -87,11 +87,10 @@ export default async function DomainPage(props: PageProps<"/experts/[domain]">) 
                     <span className="machine text-muted">{step.number}</span>
                     <h3 className="display text-ink text-2xl md:text-3xl">{step.title}</h3>
                   </div>
-                  <div className="sm:pl-12 flex flex-col lg:flex-row lg:items-baseline lg:justify-between gap-3">
-                    <p className="text-sm md:text-base text-muted leading-relaxed max-w-md">
+                  <div className="sm:pl-12">
+                    <p className="text-sm md:text-base text-muted leading-relaxed max-w-xl">
                       {step.description}
                     </p>
-                    <span className="machine text-blue shrink-0">{step.annotation}</span>
                   </div>
                 </li>
               ))}

@@ -37,7 +37,7 @@ export function ContactForm() {
     useForm<FormData>({ resolver: zodResolver(schema) });
 
   const onSubmit = async (data: FormData) => {
-    const subject = encodeURIComponent(`AIG Force Enquiry — ${data.name}`);
+    const subject = encodeURIComponent(`AIG Force Enquiry from ${data.name}`);
     const body = encodeURIComponent(
       `Name: ${data.name}\nEmail: ${data.email}\nCompany: ${data.company || "N/A"}\nDomain: ${data.domain}\n\n${data.message}`
     );
@@ -48,7 +48,7 @@ export function ContactForm() {
   if (submitted) {
     return (
       <div className="bg-bone border border-hairline p-10">
-        <p className="machine text-blue mb-4">message_sent · ✓</p>
+        <p className="eyebrow text-blue mb-4">Message sent</p>
         <h3 className="display text-ink text-2xl mb-3">Thank you.</h3>
         <p className="text-muted text-sm leading-relaxed">
           We&apos;ll get back to you within one business day.

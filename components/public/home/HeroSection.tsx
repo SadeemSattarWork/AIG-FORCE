@@ -83,8 +83,8 @@ export function HeroSection() {
 
       {/* Content — anchored low-left, editorial */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 flex flex-col justify-end pb-20 md:pb-28">
-        <motion.p {...fadeIn(0.15)} className="machine text-white/60 mb-6">
-          ai-native recruitment · résumé to offer
+        <motion.p {...fadeIn(0.15)} className="eyebrow text-white/70 mb-6">
+          Intelligent recruitment, résumé to offer
         </motion.p>
 
         <h1 className="display text-white text-5xl md:text-7xl lg:text-8xl max-w-5xl mb-10">

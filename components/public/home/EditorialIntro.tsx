@@ -4,10 +4,10 @@ import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 
 const stats = [
-  "experts_vetted · 2,500+",
-  "companies_served · 180+",
-  "countries · 60+",
-  "avg_match · 48h",
+  { value: "2,500+", label: "Experts vetted" },
+  { value: "180+", label: "Companies served" },
+  { value: "60+", label: "Countries" },
+  { value: "48h", label: "Average match time" },
 ];
 
 export function EditorialIntro() {
@@ -37,9 +37,9 @@ export function EditorialIntro() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8">
           <motion.div {...rise} className="md:col-span-5">
             <p className="text-lg md:text-xl font-semibold text-ink leading-relaxed max-w-md">
-              AIG Force runs your entire hiring pipeline — from résumé
-              screening to structured AI interviews — and hands you a ranked
-              shortlist of the world&apos;s best experts.
+              AIG Force runs your entire hiring pipeline, from résumé screening
+              to structured AI interviews, and hands you a ranked shortlist of
+              the world&apos;s best experts.
             </p>
           </motion.div>
 
@@ -49,14 +49,14 @@ export function EditorialIntro() {
             <p className="text-sm md:text-base text-muted leading-relaxed">
               Our network spans rigorously vetted specialists across biology,
               software engineering, law, medicine, and finance. Every profile
-              is verified before it ever reaches your desk — depth first,
-              never volume.
+              is verified before it ever reaches your desk. Depth first, never
+              volume.
             </p>
             <p className="text-sm md:text-base text-muted leading-relaxed">
               Our AI interviewer conducts structured, role-specific interviews
               and scores every candidate against the same evidence-based
-              rubric — no scheduling bottlenecks, no first-impression bias,
-              no lost weeks. You make the final call, with better information.
+              rubric. No scheduling bottlenecks, no first-impression bias, no
+              lost weeks. You make the final call, with better information.
             </p>
             <Link href="/#pipeline" className="arrow-link text-blue !mt-10">
               See the pipeline <span className="arrow">↗</span>
@@ -64,17 +64,22 @@ export function EditorialIntro() {
           </motion.div>
         </div>
 
-        {/* Corner bracket + machine stat strip */}
+        {/* Corner bracket + stat strip */}
         <motion.div {...rise} className="mt-20 md:mt-28">
           <div
             className="w-6 h-6 border-l border-b border-hairline mb-8"
             aria-hidden="true"
           />
-          <div className="border-t border-hairline pt-6 flex flex-wrap gap-x-10 gap-y-2">
+          <div className="border-t border-hairline pt-8 grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat) => (
-              <span key={stat} className="machine text-muted">
-                {stat}
-              </span>
+              <div key={stat.label}>
+                <p className="display text-ink text-3xl md:text-4xl mb-1.5">
+                  {stat.value}
+                </p>
+                <p className="text-xs text-muted uppercase tracking-wider">
+                  {stat.label}
+                </p>
+              </div>
             ))}
           </div>
         </motion.div>

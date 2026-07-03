@@ -91,16 +91,10 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Machine stamp — the platform's quiet self-description */}
           <div className="md:text-right md:flex md:flex-col md:items-end md:justify-between">
-            <p className="machine text-white/40">
-              aig_force
-              <br />
-              ai-native recruitment
-              <br />
-              60+ countries · 5 domains
-              <br />
-              avg_match · 48h
+            <p className="text-sm text-white/40 leading-relaxed max-w-[16rem] md:ml-auto">
+              Intelligent hiring for a changing workforce. Vetted experts in
+              five domains, across 60+ countries.
             </p>
           </div>
         </div>

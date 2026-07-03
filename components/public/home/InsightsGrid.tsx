@@ -2,43 +2,8 @@
 
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
-import { insights, type Insight } from "@/lib/insights";
-
-/* Typographic covers — no stock photos: a gradient field with the
-   article's index as an oversized serif numeral */
-function Cover({
-  insight,
-  index,
-  large = false,
-}: {
-  insight: Insight;
-  index: number;
-  large?: boolean;
-}) {
-  const gradients = [
-    "linear-gradient(115deg, #1801AB 0%, #0A0560 80%)",
-    "linear-gradient(115deg, #0A0560 0%, #1801AB 90%)",
-    "linear-gradient(115deg, #2B14E8 0%, #0A0560 75%)",
-  ];
-  return (
-    <div
-      className={`relative overflow-hidden ${large ? "aspect-[16/10]" : "aspect-[16/9]"}`}
-      style={{ background: gradients[index % gradients.length] }}
-      aria-hidden="true"
-    >
-      <span className="machine text-white/60 absolute top-4 left-5">
-        insight_{String(index + 1).padStart(3, "0")} · {insight.tag.toLowerCase()}
-      </span>
-      <span
-        className={`display italic text-white/15 absolute -bottom-6 right-2 leading-none select-none ${
-          large ? "text-[11rem] md:text-[15rem]" : "text-[7rem]"
-        }`}
-      >
-        {String(index + 1).padStart(2, "0")}
-      </span>
-    </div>
-  );
-}
+import { insights } from "@/lib/insights";
+import { InsightCover } from "@/components/public/insights/InsightCover";
 
 export function InsightsGrid() {
   const reduce = useReducedMotion();
@@ -71,7 +36,7 @@ export function InsightsGrid() {
           {/* Feature article */}
           <motion.article {...rise} className="lg:col-span-7">
             <Link href="/insights" className="group block">
-              <Cover insight={feature} index={0} large />
+              <InsightCover insight={feature} index={0} large />
               <div className="flex items-center justify-between mt-5 mb-6">
                 <span className="machine text-muted">{feature.date}</span>
                 <span className="arrow-link text-blue">
@@ -94,7 +59,7 @@ export function InsightsGrid() {
             {rest.map((insight, i) => (
               <motion.article key={insight.slug} {...rise}>
                 <Link href="/insights" className="group block">
-                  <Cover insight={insight} index={i + 1} />
+                  <InsightCover insight={insight} index={i + 1} />
                   <div className="grid grid-cols-[1fr_auto] gap-x-6 gap-y-2 mt-5 items-start">
                     <h3 className="display text-ink text-xl md:text-2xl group-hover:text-blue transition-colors">
                       {insight.title}

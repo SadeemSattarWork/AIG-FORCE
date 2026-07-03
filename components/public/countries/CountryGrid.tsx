@@ -9,7 +9,7 @@ export function CountryGrid({ region, countries }: CountryGridProps) {
       <div className="flex items-baseline justify-between border-b border-hairline pb-4 mb-6">
         <h2 className="display text-ink text-2xl md:text-3xl">{region}</h2>
         <span className="machine text-muted">
-          countries · {countries.length}
+          {countries.length} countries
         </span>
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-4 gap-y-1.5">

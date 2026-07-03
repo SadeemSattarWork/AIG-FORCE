@@ -7,17 +7,17 @@ import { CTABanner } from "@/components/shared/CTABanner";
 export const metadata: Metadata = {
   title: "Join as a Domain Expert",
   description:
-    "Apply to join AIG Force's expert network. Work on high-value projects with leading companies — remotely, flexibly, and on your terms.",
+    "Apply to join AIG Force's expert network. Work on high-value projects with leading companies, remotely, flexibly, and on your terms.",
 };
 
 const steps = [
-  { number: "01", title: "Apply in minutes", description: "Tell us your domain, credentials, and the work you want. The application is short and respectful of your time.", annotation: "application · 6m avg" },
-  { number: "02", title: "Interview once, fairly", description: "Our AI interviewer assesses your depth on the same rubric as everyone else — any timezone, no scheduling ping-pong, no first-impression bias.", annotation: "interview_scored · same rubric" },
-  { number: "03", title: "Get matched", description: "Once approved, you're matched with companies looking for exactly your expertise. You choose what to pursue.", annotation: "matches · your terms" },
+  { number: "01", title: "Apply in minutes", description: "Tell us your domain, credentials, and the work you want. The application is short and respectful of your time." },
+  { number: "02", title: "Interview once, fairly", description: "Our AI interviewer assesses your depth on the same rubric as everyone else, in any timezone, with no scheduling ping-pong and no first-impression bias." },
+  { number: "03", title: "Get matched", description: "Once approved, you're matched with companies looking for exactly your expertise. You choose what to pursue." },
 ];
 
 const benefits = [
-  { title: "Flexible engagements", description: "Project-based, part-time, or full-time — work in whatever format suits your career." },
+  { title: "Flexible engagements", description: "Project-based, part-time, or full-time. Work in whatever format suits your career." },
   { title: "Remote-first", description: "Every placement is remote by default. Work from anywhere, with companies across 60+ countries." },
   { title: "High-value work", description: "AIG Force clients are serious companies hiring for meaningful roles. No low-effort gigs." },
   { title: "Vetted companies", description: "We screen companies as rigorously as we screen experts. You'll only be matched with organizations that meet our standards." },
@@ -57,11 +57,10 @@ export default function ForExpertsPage() {
                     <span className="machine text-muted">{step.number}</span>
                     <h3 className="display text-ink text-2xl md:text-3xl">{step.title}</h3>
                   </div>
-                  <div className="sm:pl-12 flex flex-col lg:flex-row lg:items-baseline lg:justify-between gap-3">
-                    <p className="text-sm md:text-base text-muted leading-relaxed max-w-md">
+                  <div className="sm:pl-12">
+                    <p className="text-sm md:text-base text-muted leading-relaxed max-w-xl">
                       {step.description}
                     </p>
-                    <span className="machine text-blue shrink-0">{step.annotation}</span>
                   </div>
                 </li>
               ))}

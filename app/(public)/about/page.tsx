@@ -9,10 +9,10 @@ export const metadata: Metadata = {
 };
 
 const values = [
-  { title: "Depth over breadth", description: "The world's hardest problems get solved by people with genuine mastery — not generalists with a broad CV. Every expert we place has proven depth in their domain." },
+  { title: "Depth over breadth", description: "The world's hardest problems get solved by people with genuine mastery, not generalists with a broad CV. Every expert we place has proven depth in their domain." },
   { title: "Trust through rigor", description: "Our vetting is thorough because trust is earned, not assumed. Companies that hire through us know the calibre they're getting before the first meeting." },
   { title: "Direct and transparent", description: "No hidden fees. No agency middlemen. No confusing pricing. The relationship between a company and an expert should be direct and honest." },
-  { title: "Remote by default", description: "The best experts are everywhere. We were built for distributed work from day one — connecting talent and opportunity across geographies." },
+  { title: "Remote by default", description: "The best experts are everywhere. We were built for distributed work from day one, connecting talent and opportunity across geographies." },
 ];
 
 const team = [
@@ -43,21 +43,21 @@ export default function AboutPage() {
           <div className="md:col-span-6 space-y-6">
             <p className="text-lg md:text-xl font-semibold text-ink leading-relaxed">
               The best talent in any domain is rarely found through a job
-              board. They&apos;re deep in their field — publishing, building,
-              advising — not updating a profile.
+              board. They&apos;re deep in their field, publishing, building,
+              and advising, not updating a profile.
             </p>
             <p className="text-sm md:text-base text-muted leading-relaxed">
               Traditional recruiters can&apos;t reach them, and even when they
               do, they lack the domain knowledge to evaluate what they&apos;re
               looking at. AIG Force was built to solve this. We maintain
               curated networks of verified domain experts across biology,
-              software engineering, law, medicine, and finance — every person
+              software engineering, law, medicine, and finance, every person
               reviewed by people who understand their field deeply.
             </p>
             <p className="text-sm md:text-base text-muted leading-relaxed">
               When a company comes to us, we don&apos;t spray résumés. The
               pipeline screens, interviews, and scores; we find the right
-              match, quickly, and connect you directly — without layers of
+              match, quickly, and connect you directly, without layers of
               account management or inflated agency fees standing between two
               people who need each other.
             </p>
@@ -114,7 +114,7 @@ export default function AboutPage() {
                     </span>
                   </div>
                   <p className="font-semibold text-ink text-sm">{member.name}</p>
-                  <p className="machine text-muted mt-1.5">{member.role.toLowerCase()}</p>
+                  <p className="text-muted text-xs mt-1.5">{member.role}</p>
                 </div>
               ))}
             </div>

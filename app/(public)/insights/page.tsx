@@ -5,7 +5,7 @@ import { insights } from "@/lib/insights";
 export const metadata: Metadata = {
   title: "Insights",
   description:
-    "Perspectives on AI interviews, evidence-based screening, and hiring specialists across 60+ countries — from the team behind AIG Force.",
+    "Perspectives on AI interviews, evidence-based screening, and hiring specialists across 60+ countries, from the team behind AIG Force.",
 };
 
 export default function InsightsPage() {
@@ -49,9 +49,7 @@ export default function InsightsPage() {
                     <p className="text-sm md:text-base text-muted leading-relaxed max-w-2xl mb-6">
                       {insight.excerpt}
                     </p>
-                    <p className="machine text-muted">
-                      full_article · coming soon
-                    </p>
+                    <p className="machine text-muted">Coming soon</p>
                   </div>
                 </article>
               </li>

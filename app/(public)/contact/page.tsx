@@ -22,7 +22,7 @@ export default function ContactPage() {
       <section className="bg-paper px-6 py-20 md:py-28">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-14 md:gap-8">
 
-          {/* Contact details — machine voice */}
+          {/* Contact details */}
           <div className="md:col-span-4">
             <div className="md:sticky md:top-32 space-y-10">
               <div>
@@ -36,16 +36,16 @@ export default function ContactPage() {
               </div>
               <div>
                 <p className="eyebrow text-muted mb-4">Response time</p>
-                <p className="machine text-blue">reply_within · 1 business day</p>
+                <p className="text-ink text-lg">Within 1 business day</p>
               </div>
               <div>
                 <p className="eyebrow text-muted mb-4">Coverage</p>
-                <p className="machine text-muted">
+                <p className="text-ink text-lg leading-relaxed">
                   60+ countries
                   <br />
                   5 domains
                   <br />
-                  remote-first
+                  Remote-first
                 </p>
               </div>
             </div>

@@ -38,7 +38,7 @@ export const domains: Domain[] = [
     icon: "Code2",
     description: "Elite engineers across full-stack, systems, ML, and infrastructure with proven track records.",
     longDescription:
-      "From distributed systems architects to ML engineers, our software engineering talent pool covers the full technical spectrum. We vet for depth — not breadth — ensuring every engineer we place has demonstrable expertise in their chosen domain and a track record of high-impact delivery.",
+      "From distributed systems architects to ML engineers, our software engineering talent pool covers the full technical spectrum. We vet for depth, not breadth, ensuring every engineer we place has demonstrable expertise in their chosen domain and a track record of high-impact delivery.",
     specializations: [
       "Full-Stack Development",
       "Systems Engineering",

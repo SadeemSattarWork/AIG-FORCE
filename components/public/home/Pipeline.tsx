@@ -12,7 +12,6 @@ type Stage = {
   number: string;
   name: string;
   description: string;
-  annotation: string;
 };
 
 const stages: Stage[] = [
@@ -21,35 +20,30 @@ const stages: Stage[] = [
     name: "Application",
     description:
       "Candidates apply once. The system builds a structured profile from every résumé, portfolio, and credential.",
-    annotation: "profile_indexed · 0.8s",
   },
   {
     number: "02",
     name: "AI Résumé Screen",
     description:
-      "Our ATS engine parses and scores every application against your brief — every skill weighted, nothing skimmed.",
-    annotation: "resume_parsed · 3.1s · match 87%",
+      "Our ATS engine parses and scores every application against your brief, weighing every skill so nothing is skimmed.",
   },
   {
     number: "03",
     name: "AI Interview",
     description:
-      "Our AI interviewer conducts a structured, role-specific interview — adaptive questions, one consistent rubric, any timezone.",
-    annotation: "interview_scored · 92/100",
+      "Our AI interviewer conducts a structured, role-specific interview with adaptive questions, one consistent rubric, and any timezone.",
   },
   {
     number: "04",
     name: "Scorecard",
     description:
-      "Every candidate receives an evidence-backed scorecard. Identical criteria for everyone, zero first-impression bias.",
-    annotation: "bias_check · passed",
+      "Every candidate receives an evidence-backed scorecard, with identical criteria for everyone and zero first-impression bias.",
   },
   {
     number: "05",
     name: "Shortlist & Hire",
     description:
       "You receive a ranked shortlist of the strongest candidates within 48 hours. You interview the finalists and make the call.",
-    annotation: "shortlist_ready · top 3%",
   },
 ];
 
@@ -96,8 +90,8 @@ export function Pipeline() {
               {...rise}
               className="text-muted text-base md:text-lg max-w-xl mb-16 md:mb-24"
             >
-              Five stages, fully automated — supervised by the humans who make
-              the final call.
+              Five stages, fully automated and supervised by the humans who
+              make the final call.
             </motion.p>
 
             {/* Stages + scroll rail */}
@@ -131,13 +125,10 @@ export function Pipeline() {
                         {stage.name}
                       </h3>
                     </div>
-                    <div className="sm:pl-12 flex flex-col lg:flex-row lg:items-baseline lg:justify-between gap-4">
-                      <p className="text-sm md:text-base text-muted leading-relaxed max-w-md">
+                    <div className="sm:pl-12">
+                      <p className="text-sm md:text-base text-muted leading-relaxed max-w-xl">
                         {stage.description}
                       </p>
-                      <span className="machine text-blue shrink-0">
-                        {stage.annotation}
-                      </span>
                     </div>
                   </motion.li>
                 ))}

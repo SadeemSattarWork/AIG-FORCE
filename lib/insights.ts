@@ -13,7 +13,7 @@ export const insights: Insight[] = [
     date: "21 May 2026",
     tag: "AI interviews",
     excerpt:
-      "Structured AI interviews are replacing the least reliable step in hiring. Here's what changes for candidates and hiring managers — and what stays human.",
+      "Structured AI interviews are replacing the least reliable step in hiring. Here's what changes for candidates and hiring managers, and what stays human.",
   },
   {
     slug: "what-an-ai-interviewer-actually-measures",
@@ -29,7 +29,7 @@ export const insights: Insight[] = [
     date: "11 May 2026",
     tag: "Global talent",
     excerpt:
-      "Sixty countries, one process. What to know before engaging experts across borders — and what your platform should handle for you.",
+      "Sixty countries, one process. What to know before engaging experts across borders, and what your platform should handle for you.",
   },
   {
     slug: "five-mistakes-companies-make-hiring-specialists",
@@ -37,7 +37,7 @@ export const insights: Insight[] = [
     date: "4 May 2026",
     tag: "Hiring ops",
     excerpt:
-      "Generalist playbooks fail for deep-domain roles. The most common traps — and how evidence-based screening avoids them.",
+      "Generalist playbooks fail for deep-domain roles. The most common traps, and how evidence-based screening avoids them.",
   },
   {
     slug: "resume-parsing-is-solved-ranking-isnt",
