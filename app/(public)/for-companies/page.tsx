@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { CheckCircle2 } from "lucide-react";
+import Link from "next/link";
 import { domains } from "@/lib/domains";
+import { PageHero } from "@/components/shared/PageHero";
 import { CTABanner } from "@/components/shared/CTABanner";
 
 export const metadata: Metadata = {
@@ -10,86 +11,123 @@ export const metadata: Metadata = {
 };
 
 const steps = [
-  { number: "01", title: "Submit Your Brief", description: "Tell us the domain, scope, seniority, and timeline. We keep the intake process fast — under 5 minutes." },
-  { number: "02", title: "Get Matched", description: "Our team surfaces pre-vetted experts who match your requirements exactly. Expect candidates within 48 hours." },
-  { number: "03", title: "Engage Directly", description: "Connect with your expert, agree on terms, and start work. No middlemen, no opaque agency fees." },
+  { number: "01", title: "Submit your brief", description: "Tell us the domain, scope, seniority, and timeline. Intake takes under five minutes.", annotation: "brief_received · 4m 32s" },
+  { number: "02", title: "The pipeline runs", description: "Our ATS screens the network against your brief and our AI interviewer scores every candidate on one rubric.", annotation: "candidates_scored · 100%" },
+  { number: "03", title: "Hire from a ranked shortlist", description: "You receive the strongest candidates within 48 hours, each with an evidence-backed scorecard. You make the call.", annotation: "shortlist_ready · 48h" },
 ];
 
 const valuePoints = [
-  { title: "Rigorous Vetting", description: "Every expert passes a multi-stage assessment of domain knowledge, prior work, and references before joining our network." },
-  { title: "48-Hour Matching", description: "We move fast. Most clients receive their first matched candidates within two business days of submitting a brief." },
-  { title: "Remote-First", description: "Access talent anywhere in the world. Our platform is built for distributed, asynchronous collaboration." },
-  { title: "Direct Communication", description: "You talk directly to your expert — no account managers as intermediaries. Faster feedback, faster delivery." },
+  { title: "Rigorous vetting", description: "Every expert passes a multi-stage assessment of domain knowledge, prior work, and references before joining the network." },
+  { title: "48-hour matching", description: "The pipeline never sleeps. Most clients receive their ranked shortlist within two business days of submitting a brief." },
+  { title: "Evidence, not vibes", description: "AI interview scorecards give your hiring committee comparable, structured data on every candidate — identical criteria, zero first-impression bias." },
+  { title: "Direct engagement", description: "You talk directly to your expert — no account managers as intermediaries. Faster feedback, faster delivery." },
 ];
 
 export default function ForCompaniesPage() {
   return (
     <>
-      <section className="bg-white px-6 pt-40 pb-20 border-b border-[#E8E8E8]">
-        <div className="max-w-6xl mx-auto">
-          <p className="text-xs uppercase tracking-widest text-accent font-semibold mb-4">For Companies</p>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#111111] tracking-tight mb-6 max-w-3xl">
-            Hire Elite Domain Experts, Fast
-          </h1>
-          <p className="text-[#555555] text-lg max-w-2xl leading-relaxed mb-8">
-            Stop settling for generalists. AIG Force gives you access to specialists with proven depth across the domains that matter most.
-          </p>
-          <a href="/contact" className="inline-block px-7 py-3.5 rounded-md bg-accent text-white font-medium hover:bg-accent-hover transition-colors text-sm">
-            Get Started →
-          </a>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="For Companies"
+        title={
+          <>
+            Hire elite experts, at <em>machine</em> speed.
+          </>
+        }
+        lede="Stop settling for generalists. AIG Force runs your entire hiring pipeline — screening, AI interviews, scorecards — and hands you a ranked shortlist of proven specialists."
+      />
 
-      <section className="bg-white px-6 py-20 border-b border-[#E8E8E8]">
-        <div className="max-w-6xl mx-auto">
-          <p className="text-xs uppercase tracking-widest text-accent font-semibold mb-3">Process</p>
-          <h2 className="text-3xl font-bold text-[#111111] tracking-tight mb-12">How It Works</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            {steps.map((step) => (
-              <div key={step.number}>
-                <span className="text-5xl font-bold text-[#E8E8E8] block mb-4 tabular-nums">{step.number}</span>
-                <h3 className="text-lg font-semibold text-[#111111] mb-2">{step.title}</h3>
-                <p className="text-[#555555] text-sm leading-relaxed">{step.description}</p>
-              </div>
-            ))}
+      {/* Process */}
+      <section className="bg-paper px-6 py-20 md:py-28">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8">
+          <div className="md:col-span-3">
+            <p className="eyebrow text-blue md:sticky md:top-32">Process</p>
+          </div>
+          <div className="md:col-span-9 lg:col-span-8">
+            <ol>
+              {steps.map((step, i) => (
+                <li
+                  key={step.number}
+                  className={
+                    i === steps.length - 1
+                      ? "py-8 md:py-10"
+                      : "py-8 md:py-10 border-b border-hairline"
+                  }
+                >
+                  <div className="flex items-baseline gap-5 mb-3">
+                    <span className="machine text-muted">{step.number}</span>
+                    <h3 className="display text-ink text-2xl md:text-3xl">{step.title}</h3>
+                  </div>
+                  <div className="sm:pl-12 flex flex-col lg:flex-row lg:items-baseline lg:justify-between gap-3">
+                    <p className="text-sm md:text-base text-muted leading-relaxed max-w-md">
+                      {step.description}
+                    </p>
+                    <span className="machine text-blue shrink-0">{step.annotation}</span>
+                  </div>
+                </li>
+              ))}
+            </ol>
           </div>
         </div>
       </section>
 
-      <section className="bg-[#F5F5F5] px-6 py-20 border-b border-[#E8E8E8]">
-        <div className="max-w-6xl mx-auto">
-          <p className="text-xs uppercase tracking-widest text-accent font-semibold mb-3">Domains</p>
-          <h2 className="text-3xl font-bold text-[#111111] tracking-tight mb-4">Domains You Can Hire From</h2>
-          <p className="text-[#555555] mb-10 max-w-xl">Deep expert networks across five critical verticals, with more in development.</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {domains.map((d) => (
-              <a key={d.slug} href={`/experts/${d.slug}`}
-                className="group flex items-center gap-3 p-4 bg-white border border-[#E8E8E8] rounded-lg hover:border-accent/40 transition-colors"
-              >
-                <CheckCircle2 size={16} className="text-accent shrink-0" />
-                <span className="text-[#111111] text-sm font-medium">{d.name}</span>
-              </a>
-            ))}
+      {/* Domains — hairline rows */}
+      <section className="bg-bone px-6 py-20 md:py-28">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8">
+          <div className="md:col-span-3">
+            <p className="eyebrow text-blue md:sticky md:top-32">Domains</p>
+          </div>
+          <div className="md:col-span-9 lg:col-span-8">
+            <h2 className="display text-ink text-3xl md:text-5xl mb-12">
+              Domains you can hire from.
+            </h2>
+            <ul>
+              {domains.map((d) => (
+                <li key={d.slug} className="border-b border-hairline last:border-0">
+                  <Link
+                    href={`/experts/${d.slug}`}
+                    className="group flex items-center justify-between gap-6 py-6"
+                  >
+                    <span className="display text-ink text-2xl md:text-3xl group-hover:text-blue transition-colors">
+                      {d.name}
+                    </span>
+                    <span className="arrow-link text-blue">
+                      <span className="arrow">↗</span>
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>
 
-      <section className="bg-white px-6 py-20">
-        <div className="max-w-6xl mx-auto">
-          <p className="text-xs uppercase tracking-widest text-accent font-semibold mb-3">Why Us</p>
-          <h2 className="text-3xl font-bold text-[#111111] tracking-tight mb-12">Why AIG Force</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-            {valuePoints.map((vp) => (
-              <div key={vp.title} className="border-l-2 border-accent/30 pl-6">
-                <h3 className="text-lg font-semibold text-[#111111] mb-2">{vp.title}</h3>
-                <p className="text-[#555555] text-sm leading-relaxed">{vp.description}</p>
-              </div>
-            ))}
+      {/* Why AIG Force */}
+      <section className="bg-paper px-6 py-20 md:py-28">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8">
+          <div className="md:col-span-3">
+            <p className="eyebrow text-blue md:sticky md:top-32">Why us</p>
+          </div>
+          <div className="md:col-span-9 lg:col-span-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-14">
+              {valuePoints.map((vp) => (
+                <div key={vp.title} className="border-t border-ink/80 pt-6">
+                  <h3 className="display text-ink text-xl md:text-2xl mb-3">{vp.title}</h3>
+                  <p className="text-muted text-sm leading-relaxed">{vp.description}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      <CTABanner heading="Ready to find your expert?" subtext="Submit a brief and get matched within 48 hours." buttonLabel="Get Started" href="/contact" />
+      <CTABanner
+        heading="Ready to find your expert?"
+        subtext="Submit a brief and get a ranked shortlist within 48 hours."
+        buttonLabel="Start hiring"
+        href="/contact"
+        secondaryLabel="See the pipeline"
+        secondaryHref="/#pipeline"
+      />
     </>
   );
 }

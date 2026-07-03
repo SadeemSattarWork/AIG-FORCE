@@ -1,24 +1,41 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: 'Helvetica Now Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  /* ——— Type system ———
+     Display  = Fraunces (human voice: headlines, editorial statements)
+     Sans     = Archivo  (interface voice: body, nav, UI)
+     Mono     = Fragment Mono (machine voice: pipeline annotations, scores, data) */
+  --font-sans: var(--font-archivo), 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-display: var(--font-fraunces), Georgia, 'Times New Roman', serif;
+  --font-mono: var(--font-fragment), 'SF Mono', Menlo, monospace;
 
+  /* ——— Palette ——— */
+  --color-blue: #1801AB;            /* Force Blue — sampled from the logo */
+  --color-wire: #2B14E8;            /* Live Wire — hover / gradient start */
+  --color-field: #0A0560;           /* Deep Field — gradient end */
+  --color-paper: #FFFFFF;
+  --color-bone: #F4F4EF;            /* off-white sections */
+  --color-ink: #0E0E12;
+  --color-muted: #5B5B64;
+  --color-hairline: #E4E4DC;
+
+  /* Legacy aliases still referenced by existing components */
   --color-bg: #FFFFFF;
-  --color-surface: #F5F5F5;
-  --color-border: #E8E8E8;
-  --color-text: #111111;
-  --color-text-muted: #555555;
-  --color-accent: #3B28CC;
-  --color-accent-hover: #2D1FA3;
-  --color-accent-active: #241980;
-  --color-accent-tint: rgba(59, 40, 204, 0.10);
+  --color-surface: #F4F4EF;
+  --color-border: #E4E4DC;
+  --color-text: #0E0E12;
+  --color-text-muted: #5B5B64;
+  --color-accent: #1801AB;
+  --color-accent-hover: #2B14E8;
+  --color-accent-active: #0A0560;
+  --color-accent-tint: rgba(24, 1, 171, 0.08);
   --color-success: #22C55E;
-  --color-dark: #111111;
+  --color-dark: #0E0E12;
 }
 
 :root {
   --background: #FFFFFF;
-  --foreground: #111111;
+  --foreground: #0E0E12;
 }
 
 * {
@@ -31,10 +48,83 @@ html {
 
 body {
   background: #FFFFFF;
-  color: #111111;
-  font-family: 'Helvetica Now Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: #0E0E12;
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 17px;
   line-height: 28px;
+}
+
+::selection {
+  background: #1801AB;
+  color: #FFFFFF;
+}
+
+:focus-visible {
+  outline: 2px solid #2B14E8;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ——— Editorial utilities ——— */
+
+/* Display headline: high-contrast serif, tight leading, GLG-scale */
+.display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  font-variation-settings: 'opsz' 144, 'SOFT' 0, 'WONK' 0;
+}
+
+.display em,
+.display .em {
+  font-style: italic;
+  font-variation-settings: 'opsz' 144, 'SOFT' 40, 'WONK' 0;
+}
+
+/* Eyebrow label */
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+/* Machine voice annotation */
+.machine {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+  line-height: 1.6;
+}
+
+/* Uppercase arrow link (GLG-style "DISCOVER MORE ↗") */
+.arrow-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: opacity 0.2s ease;
+}
+
+.arrow-link .arrow {
+  display: inline-block;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.arrow-link:hover .arrow {
+  transform: translate(3px, -3px);
 }

@@ -1,14 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Link from "next/link";
-import { Dna, Code2, Scale, Stethoscope, TrendingUp } from "lucide-react";
 import { domains, getDomainBySlug } from "@/lib/domains";
 import { DomainCard } from "@/components/public/experts/DomainCard";
+import { PageHero } from "@/components/shared/PageHero";
 import { CTABanner } from "@/components/shared/CTABanner";
-
-const iconMap: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
-  Dna, Code2, Scale, Stethoscope, TrendingUp,
-};
 
 export function generateStaticParams() {
   return domains.map((d) => ({ domain: d.slug }));
@@ -25,9 +20,9 @@ export async function generateMetadata(props: PageProps<"/experts/[domain]">): P
 }
 
 const hiringSteps = [
-  { number: "01", title: "Submit Your Brief", description: "Describe the role, required expertise, and timeline." },
-  { number: "02", title: "Expert Matching", description: "We surface pre-vetted candidates from our domain network within 48 hours." },
-  { number: "03", title: "Engage Directly", description: "Connect with your chosen expert and start work — no agency bloat." },
+  { number: "01", title: "Submit your brief", description: "Describe the role, required expertise, and timeline.", annotation: "brief_received" },
+  { number: "02", title: "The pipeline runs", description: "Our ATS screens the domain network and our AI interviewer scores every candidate against your brief.", annotation: "shortlist_ready · 48h" },
+  { number: "03", title: "You make the call", description: "Interview the finalists and engage directly — no agency bloat.", annotation: "offer_sent" },
 ];
 
 export default async function DomainPage(props: PageProps<"/experts/[domain]">) {
@@ -35,67 +30,91 @@ export default async function DomainPage(props: PageProps<"/experts/[domain]">) 
   const d = getDomainBySlug(domain);
   if (!d) notFound();
 
-  const Icon = iconMap[d.icon] ?? Dna;
   const related = domains.filter((r) => d.relatedSlugs.includes(r.slug));
 
   return (
     <>
-      <section className="bg-white px-6 pt-40 pb-16 border-b border-[#E8E8E8]">
-        <div className="max-w-6xl mx-auto">
-          <Link href="/experts" className="inline-flex items-center gap-1.5 text-xs text-[#555555] hover:text-accent transition-colors mb-8">
-            ← All Domains
-          </Link>
-          <div className="flex items-center gap-4 mb-6">
-            <div className="p-3 rounded-xl bg-accent/10">
-              <Icon size={28} className="text-accent" />
+      <PageHero
+        eyebrow="Expertise"
+        title={d.name}
+        lede={d.longDescription}
+        backHref="/experts"
+        backLabel="All domains"
+      />
+
+      {/* Specializations — machine chips */}
+      <section className="bg-paper px-6 py-20 md:py-28">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8">
+          <div className="md:col-span-3">
+            <p className="eyebrow text-blue">Specializations</p>
+          </div>
+          <div className="md:col-span-9 lg:col-span-8">
+            <div className="flex flex-wrap gap-2.5">
+              {d.specializations.map((spec) => (
+                <span
+                  key={spec}
+                  className="machine text-ink border border-hairline px-3.5 py-2"
+                >
+                  {spec}
+                </span>
+              ))}
             </div>
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-[#111111] tracking-tight mb-5">{d.name} Experts</h1>
-          <p className="text-[#555555] text-lg max-w-2xl leading-relaxed">{d.longDescription}</p>
         </div>
       </section>
 
-      <section className="bg-[#F5F5F5] px-6 py-16 border-b border-[#E8E8E8]">
-        <div className="max-w-6xl mx-auto">
-          <p className="text-xs uppercase tracking-widest text-accent font-semibold mb-4">Specializations</p>
-          <div className="flex flex-wrap gap-3">
-            {d.specializations.map((spec) => (
-              <span key={spec} className="text-sm text-accent bg-accent/10 rounded-full px-4 py-1.5 font-medium">
-                {spec}
-              </span>
-            ))}
+      {/* Process — editorial numbered rows */}
+      <section className="bg-bone px-6 py-20 md:py-28">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8">
+          <div className="md:col-span-3">
+            <p className="eyebrow text-blue md:sticky md:top-32">Process</p>
+          </div>
+          <div className="md:col-span-9 lg:col-span-8">
+            <h2 className="display text-ink text-3xl md:text-5xl mb-12 md:mb-16">
+              How to hire a {d.name.toLowerCase()} <em>expert.</em>
+            </h2>
+            <ol>
+              {hiringSteps.map((step, i) => (
+                <li
+                  key={step.number}
+                  className={
+                    i === hiringSteps.length - 1
+                      ? "py-8 md:py-10"
+                      : "py-8 md:py-10 border-b border-hairline"
+                  }
+                >
+                  <div className="flex items-baseline gap-5 mb-3">
+                    <span className="machine text-muted">{step.number}</span>
+                    <h3 className="display text-ink text-2xl md:text-3xl">{step.title}</h3>
+                  </div>
+                  <div className="sm:pl-12 flex flex-col lg:flex-row lg:items-baseline lg:justify-between gap-3">
+                    <p className="text-sm md:text-base text-muted leading-relaxed max-w-md">
+                      {step.description}
+                    </p>
+                    <span className="machine text-blue shrink-0">{step.annotation}</span>
+                  </div>
+                </li>
+              ))}
+            </ol>
           </div>
         </div>
       </section>
 
-      <section className="bg-white px-6 py-20 border-b border-[#E8E8E8]">
-        <div className="max-w-6xl mx-auto">
-          <p className="text-xs uppercase tracking-widest text-accent font-semibold mb-3">Process</p>
-          <h2 className="text-2xl md:text-3xl font-bold text-[#111111] tracking-tight mb-10">
-            How to Hire a {d.name} Expert
-          </h2>
-          <div className="flex flex-col gap-0 max-w-2xl">
-            {hiringSteps.map((step) => (
-              <div key={step.number} className="flex gap-6 py-8 border-b border-[#E8E8E8] last:border-0">
-                <span className="text-4xl font-bold text-[#E8E8E8] shrink-0 tabular-nums leading-none">{step.number}</span>
-                <div className="pt-1">
-                  <h3 className="text-lg font-semibold text-[#111111] mb-1">{step.title}</h3>
-                  <p className="text-[#555555] text-sm leading-relaxed">{step.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
+      {/* Related domains */}
       {related.length > 0 && (
-        <section className="bg-[#F5F5F5] px-6 py-16 border-b border-[#E8E8E8]">
-          <div className="max-w-6xl mx-auto">
-            <p className="text-xs uppercase tracking-widest text-accent font-semibold mb-3">Related</p>
-            <h2 className="text-xl font-semibold text-[#111111] mb-6">Related Domains</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <section className="bg-paper px-6 py-20 md:py-28">
+          <div className="max-w-7xl mx-auto">
+            <p className="eyebrow text-blue mb-12">Related domains</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-12 max-w-4xl">
               {related.map((r, i) => (
-                <DomainCard key={r.slug} slug={r.slug} name={r.name} icon={r.icon} description={r.description} index={i} />
+                <DomainCard
+                  key={r.slug}
+                  slug={r.slug}
+                  name={r.name}
+                  icon={r.icon}
+                  description={r.description}
+                  index={i}
+                />
               ))}
             </div>
           </div>
@@ -103,9 +122,9 @@ export default async function DomainPage(props: PageProps<"/experts/[domain]">) 
       )}
 
       <CTABanner
-        heading={`Hire a ${d.name} Expert`}
-        subtext="Submit your brief and get matched within 48 hours."
-        buttonLabel={`Hire a ${d.name} Expert`}
+        heading={`Hire a ${d.name.toLowerCase()} expert.`}
+        subtext="Submit your brief and receive a ranked shortlist within 48 hours."
+        buttonLabel="Start hiring"
         href="/contact"
       />
     </>

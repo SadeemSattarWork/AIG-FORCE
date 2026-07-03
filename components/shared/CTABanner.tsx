@@ -9,29 +9,35 @@ type CTABannerProps = {
   secondaryHref?: string;
 };
 
+/* Full-bleed Force Blue closing panel — serif statement + arrow links */
 export function CTABanner({ heading, subtext, buttonLabel, href, secondaryLabel, secondaryHref }: CTABannerProps) {
   return (
-    <section className="w-full bg-[#F5F5F5] border-t border-[#E8E8E8] px-6 py-20 md:py-28">
-      <div className="max-w-3xl mx-auto text-center">
-        <h2 className="text-3xl md:text-4xl font-bold text-[#111111] tracking-tight mb-4">
+    <section
+      className="w-full px-6 py-24 md:py-32"
+      style={{
+        background:
+          "linear-gradient(100deg, #1801AB 0%, #0A0560 100%)",
+      }}
+    >
+      <div className="max-w-7xl mx-auto">
+        <h2 className="display text-white text-4xl md:text-5xl lg:text-6xl max-w-3xl mb-6">
           {heading}
         </h2>
         {subtext && (
-          <p className="text-[#555555] text-lg mb-8 max-w-xl mx-auto">{subtext}</p>
+          <p className="text-white/60 text-base md:text-lg mb-12 max-w-xl leading-relaxed">
+            {subtext}
+          </p>
         )}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Link
-            href={href}
-            className="px-7 py-3 rounded-md bg-accent text-white font-medium hover:bg-accent-hover transition-colors text-sm"
-          >
-            {buttonLabel}
+        <div className="flex flex-col sm:flex-row sm:items-center gap-6 sm:gap-12">
+          <Link href={href} className="arrow-link text-white">
+            {buttonLabel} <span className="arrow">↗</span>
           </Link>
           {secondaryLabel && secondaryHref && (
             <Link
               href={secondaryHref}
-              className="px-7 py-3 rounded-md border border-[#E8E8E8] text-[#111111] font-medium hover:border-accent hover:text-accent transition-colors text-sm"
+              className="arrow-link text-white/60 hover:text-white transition-colors"
             >
-              {secondaryLabel}
+              {secondaryLabel} <span className="arrow">↗</span>
             </Link>
           )}
         </div>

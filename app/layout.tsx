@@ -1,7 +1,26 @@
 import type { Metadata } from "next";
+import { Fraunces, Archivo, Fragment_Mono } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/shared/Navbar";
 import { Footer } from "@/components/shared/Footer";
+
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-fraunces",
+  style: ["normal", "italic"],
+  axes: ["opsz", "SOFT", "WONK"],
+});
+
+const archivo = Archivo({
+  subsets: ["latin"],
+  variable: "--font-archivo",
+});
+
+const fragmentMono = Fragment_Mono({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-fragment",
+});
 
 export const metadata: Metadata = {
   title: {
@@ -54,7 +73,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${fraunces.variable} ${archivo.variable} ${fragmentMono.variable}`}>
       <body className="antialiased">
         <Navbar />
         <main>{children}</main>

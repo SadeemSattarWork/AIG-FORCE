@@ -26,9 +26,9 @@ const domainOptions = [
 ];
 
 const fieldClass =
-  "w-full bg-white border border-[#E8E8E8] rounded-md px-4 py-3 text-[#111111] text-sm placeholder:text-[#AAAAAA] focus:outline-none focus:border-accent transition-colors";
-const errorClass = "text-red-500 text-xs mt-1";
-const labelClass = "block text-sm font-medium text-[#111111] mb-1.5";
+  "w-full bg-white border border-hairline px-4 py-3.5 text-ink text-sm placeholder:text-muted/50 focus:outline-none focus:border-blue transition-colors";
+const errorClass = "text-red-600 text-xs mt-1.5";
+const labelClass = "eyebrow block text-ink mb-3";
 
 export function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
@@ -41,17 +41,17 @@ export function ContactForm() {
     const body = encodeURIComponent(
       `Name: ${data.name}\nEmail: ${data.email}\nCompany: ${data.company || "N/A"}\nDomain: ${data.domain}\n\n${data.message}`
     );
-    window.location.href = `mailto:support@aigforce.com?subject=${subject}&body=${body}`;
+    window.location.assign(`mailto:support@aigforce.com?subject=${subject}&body=${body}`);
     setSubmitted(true);
   };
 
   if (submitted) {
     return (
-      <div className="bg-[#F5F5F5] border border-[#E8E8E8] rounded-xl p-8 text-center">
-        <div className="text-3xl mb-4 text-accent">✓</div>
-        <h3 className="text-xl font-semibold text-[#111111] mb-2">Message Sent</h3>
-        <p className="text-[#555555] text-sm">
-          Thanks for reaching out. We&apos;ll get back to you within one business day.
+      <div className="bg-bone border border-hairline p-10">
+        <p className="machine text-blue mb-4">message_sent · ✓</p>
+        <h3 className="display text-ink text-2xl mb-3">Thank you.</h3>
+        <p className="text-muted text-sm leading-relaxed">
+          We&apos;ll get back to you within one business day.
         </p>
       </div>
     );
@@ -93,9 +93,9 @@ export function ContactForm() {
       </div>
 
       <button type="submit" disabled={isSubmitting}
-        className="px-7 py-3.5 rounded-md bg-accent text-white font-medium hover:bg-accent-hover transition-colors text-sm disabled:opacity-60 disabled:cursor-not-allowed"
+        className="self-start px-10 py-4 bg-blue text-white font-semibold text-xs uppercase tracking-[0.1em] hover:bg-wire transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
       >
-        {isSubmitting ? "Sending..." : "Send Message →"}
+        {isSubmitting ? "Sending…" : "Send message ↗"}
       </button>
     </form>
   );

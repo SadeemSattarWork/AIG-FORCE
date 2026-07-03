@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
-import { Dna, Code2, Scale, Stethoscope, TrendingUp, ArrowRight } from "lucide-react";
+import { Dna, Code2, Scale, Stethoscope, TrendingUp } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const iconMap: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
@@ -22,6 +22,7 @@ type DomainCardProps = {
   large?: boolean;
 };
 
+/* Flat editorial tile — hairline top rule, serif name, quiet arrow link */
 export function DomainCard({ slug, name, icon, description, index = 0, large = false }: DomainCardProps) {
   const Icon = iconMap[icon] ?? Dna;
   const reduce = useReducedMotion();
@@ -31,30 +32,36 @@ export function DomainCard({ slug, name, icon, description, index = 0, large = f
       initial={reduce ? undefined : { opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.5, delay: reduce ? 0 : index * 0.1, ease: "easeOut" }}
+      transition={{ duration: 0.5, delay: reduce ? 0 : index * 0.08, ease: "easeOut" }}
     >
       <Link
         href={`/experts/${slug}`}
         className={cn(
-          "group flex flex-col bg-white border border-[#E8E8E8] rounded-xl hover:border-accent/40 hover:shadow-sm transition-all duration-300",
-          large ? "p-8" : "p-6"
+          "group flex flex-col h-full border-t border-ink/80 hover:border-blue transition-colors",
+          large ? "pt-8 pb-4" : "pt-6 pb-3"
         )}
       >
-        <div className="flex items-start justify-between mb-4">
-          <div className="p-2.5 rounded-lg bg-accent/10">
-            <Icon size={large ? 24 : 20} className="text-accent" />
-          </div>
-          <ArrowRight
-            size={16}
-            className="text-[#E8E8E8] group-hover:text-accent group-hover:translate-x-1 transition-all duration-200 mt-1"
+        <div className="flex items-start justify-between gap-4 mb-5">
+          <h3
+            className={cn(
+              "display text-ink group-hover:text-blue transition-colors",
+              large ? "text-2xl md:text-3xl" : "text-xl md:text-2xl"
+            )}
+          >
+            {name}
+          </h3>
+          <Icon
+            size={large ? 22 : 18}
+            className="text-blue shrink-0 mt-1.5"
+            aria-hidden="true"
           />
         </div>
-        <h3 className={cn("font-semibold text-[#111111] mb-2", large ? "text-xl" : "text-base")}>
-          {name}
-        </h3>
-        <p className={cn("text-[#555555] leading-relaxed", large ? "text-base" : "text-sm")}>
+        <p className={cn("text-muted leading-relaxed mb-6", large ? "text-sm md:text-base" : "text-sm")}>
           {description}
         </p>
+        <span className="arrow-link text-blue mt-auto">
+          View domain <span className="arrow">↗</span>
+        </span>
       </Link>
     </motion.div>
   );

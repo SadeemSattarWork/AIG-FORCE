@@ -9,21 +9,56 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <section className="bg-white min-h-screen px-6 pt-40 pb-24">
-      <div className="max-w-2xl mx-auto">
-        <p className="text-xs uppercase tracking-widest text-accent font-semibold mb-4">
-          Get in Touch
-        </p>
-        <h1 className="text-4xl md:text-5xl font-bold text-[#111111] tracking-tight mb-4">Contact Us</h1>
-        <p className="text-[#555555] mb-2">
-          Fill in the form below or reach us directly at{" "}
-          <a href="mailto:support@aigforce.com" className="text-accent hover:text-accent-hover underline underline-offset-4 transition-colors">
-            support@aigforce.com
-          </a>
-        </p>
-        <p className="text-[#AAAAAA] text-sm mb-12">We typically respond within one business day.</p>
-        <ContactForm />
-      </div>
-    </section>
+    <>
+      <section className="bg-bone px-6 pt-40 pb-16 md:pt-48 md:pb-24">
+        <div className="max-w-7xl mx-auto">
+          <p className="eyebrow text-blue mb-8">Contact</p>
+          <h1 className="display text-ink text-4xl md:text-6xl lg:text-7xl max-w-3xl">
+            Let&apos;s <em>talk.</em>
+          </h1>
+        </div>
+      </section>
+
+      <section className="bg-paper px-6 py-20 md:py-28">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-14 md:gap-8">
+
+          {/* Contact details — machine voice */}
+          <div className="md:col-span-4">
+            <div className="md:sticky md:top-32 space-y-10">
+              <div>
+                <p className="eyebrow text-muted mb-4">Email</p>
+                <a
+                  href="mailto:support@aigforce.com"
+                  className="text-ink text-lg hover:text-blue transition-colors"
+                >
+                  support@aigforce.com
+                </a>
+              </div>
+              <div>
+                <p className="eyebrow text-muted mb-4">Response time</p>
+                <p className="machine text-blue">reply_within · 1 business day</p>
+              </div>
+              <div>
+                <p className="eyebrow text-muted mb-4">Coverage</p>
+                <p className="machine text-muted">
+                  60+ countries
+                  <br />
+                  5 domains
+                  <br />
+                  remote-first
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="hidden md:block md:col-span-1" />
+
+          {/* Form */}
+          <div className="md:col-span-7">
+            <ContactForm />
+          </div>
+        </div>
+      </section>
+    </>
   );
 }
