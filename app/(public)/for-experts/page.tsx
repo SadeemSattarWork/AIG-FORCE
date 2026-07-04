@@ -36,6 +36,15 @@ export default function ForExpertsPage() {
         lede="We match elite domain experts with companies that need real depth. One structured interview puts your work in front of organizations you'd never find alone."
       />
 
+      {/* Primary CTA — straight to the open roles board */}
+      <section className="bg-bone px-6 pb-16 md:pb-20">
+        <div className="max-w-7xl mx-auto">
+          <Link href="/for-experts/roles" className="arrow-link text-blue text-base">
+            View open opportunities <span className="arrow">↗</span>
+          </Link>
+        </div>
+      </section>
+
       {/* Process */}
       <section className="bg-paper px-6 py-20 md:py-28">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8">
@@ -121,9 +130,9 @@ export default function ForExpertsPage() {
 
       <CTABanner
         heading="Ready to join the network?"
-        subtext="Apply now and get matched with companies that value your expertise."
-        buttonLabel="Apply now"
-        href="/contact"
+        subtext="Browse open opportunities and apply to the roles that match your expertise."
+        buttonLabel="View open roles"
+        href="/for-experts/roles"
       />
     </>
   );

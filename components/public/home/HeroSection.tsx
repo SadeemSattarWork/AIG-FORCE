@@ -108,7 +108,7 @@ export function HeroSection() {
             Start hiring <span className="arrow">↗</span>
           </Link>
           <Link
-            href="/for-experts"
+            href="/for-experts/roles"
             className="arrow-link text-white/60 hover:text-white transition-colors"
           >
             Join as an expert <span className="arrow">↗</span>

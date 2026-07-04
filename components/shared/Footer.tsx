@@ -6,8 +6,8 @@ import { domains } from "@/lib/domains";
 const solutionsLinks = [
   { href: "/for-companies", label: "For Companies" },
   { href: "/for-experts", label: "For Experts" },
+  { href: "/for-experts/roles", label: "Opportunities" },
   { href: "/supported-countries", label: "Global Coverage" },
-  { href: "/#pipeline", label: "How It Works" },
 ];
 
 const companyLinks = [
