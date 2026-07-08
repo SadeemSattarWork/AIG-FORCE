@@ -15,12 +15,6 @@ const values = [
   { title: "Remote by default", description: "The best experts are everywhere. We were built for distributed work from day one, connecting talent and opportunity across geographies." },
 ];
 
-const team = [
-  { name: "Founder", role: "CEO & Co-Founder" },
-  { name: "Co-Founder", role: "CTO & Co-Founder" },
-  { name: "Head of Vetting", role: "Expert Relations" },
-  { name: "Head of Growth", role: "Business Development" },
-];
 
 export default function AboutPage() {
   return (
@@ -99,25 +93,50 @@ export default function AboutPage() {
       <section className="bg-paper px-6 py-20 md:py-28">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8">
           <div className="md:col-span-3">
-            <p className="eyebrow text-blue md:sticky md:top-32">Team</p>
+            <p className="eyebrow text-blue md:sticky md:top-32">Leadership</p>
           </div>
           <div className="md:col-span-9 lg:col-span-8">
             <h2 className="display text-ink text-3xl md:text-5xl mb-12">
-              The people behind the <em>engine.</em>
+              The person behind the <em>engine.</em>
             </h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-10">
-              {team.map((member) => (
-                <div key={member.name}>
-                  <div className="w-full aspect-square bg-bone border border-hairline mb-5 flex items-center justify-center">
-                    <span className="display italic text-4xl text-blue">
-                      {member.name.charAt(0)}
-                    </span>
-                  </div>
-                  <p className="font-semibold text-ink text-sm">{member.name}</p>
-                  <p className="text-muted text-xs mt-1.5">{member.role}</p>
+
+            <figure className="grid grid-cols-1 sm:grid-cols-12 gap-8 items-end">
+              {/* Photo — drop the headshot at public/team/sadeem-sattar.jpg
+                  and it fills this panel. Until then, a styled monogram shows.
+                  Using a CSS background (not next/image) so a missing file
+                  degrades gracefully instead of failing the build. */}
+              <div className="sm:col-span-5">
+                <div
+                  className="relative aspect-[4/5] overflow-hidden border border-hairline flex items-center justify-center bg-cover bg-top"
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(160deg, rgba(244,244,239,0) 40%, rgba(24,1,171,0.08) 100%), url('/team/sadeem-sattar.jpg')",
+                    backgroundColor: "#F4F4EF",
+                  }}
+                >
+                  <span
+                    className="display italic text-6xl text-blue/30 select-none"
+                    aria-hidden="true"
+                  >
+                    SS
+                  </span>
                 </div>
-              ))}
-            </div>
+              </div>
+
+              <figcaption className="sm:col-span-7 pb-2">
+                <p className="display text-ink text-3xl md:text-4xl mb-2">
+                  Sadeem Sattar
+                </p>
+                <p className="text-blue text-sm font-semibold uppercase tracking-[0.12em] mb-6">
+                  CEO &amp; Founder
+                </p>
+                <p className="text-sm md:text-base text-muted leading-relaxed max-w-md">
+                  Sadeem founded AIG Force to fix expert hiring, pairing an
+                  AI-native pipeline with human judgment so companies reach the
+                  world&apos;s best specialists faster.
+                </p>
+              </figcaption>
+            </figure>
           </div>
         </div>
       </section>
