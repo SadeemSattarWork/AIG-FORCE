@@ -35,13 +35,10 @@ export function InsightsGrid() {
 
           {/* Feature article */}
           <motion.article {...rise} className="lg:col-span-7">
-            <Link href="/insights" className="group block">
+            <Link href={`/insights#${feature.slug}`} className="group block">
               <InsightCover insight={feature} index={0} large />
-              <div className="flex items-center justify-between mt-5 mb-6">
+              <div className="mt-5 mb-6">
                 <span className="machine text-muted">{feature.date}</span>
-                <span className="arrow-link text-blue">
-                  Read more <span className="arrow">↗</span>
-                </span>
               </div>
               <h3 className="display text-ink text-3xl md:text-4xl max-w-lg mb-5 group-hover:text-blue transition-colors">
                 {feature.title}
@@ -58,17 +55,13 @@ export function InsightsGrid() {
           <div className="lg:col-span-4 flex flex-col gap-14">
             {rest.map((insight, i) => (
               <motion.article key={insight.slug} {...rise}>
-                <Link href="/insights" className="group block">
+                <Link href={`/insights#${insight.slug}`} className="group block">
                   <InsightCover insight={insight} index={i + 1} />
                   <div className="grid grid-cols-[1fr_auto] gap-x-6 gap-y-2 mt-5 items-start">
                     <h3 className="display text-ink text-xl md:text-2xl group-hover:text-blue transition-colors">
                       {insight.title}
                     </h3>
                     <span className="machine text-muted pt-1.5">{insight.date}</span>
-                    <span />
-                    <span className="arrow-link text-blue justify-self-end">
-                      Read more <span className="arrow">↗</span>
-                    </span>
                   </div>
                 </Link>
               </motion.article>

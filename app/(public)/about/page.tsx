@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { PageHero } from "@/components/shared/PageHero";
 import { CTABanner } from "@/components/shared/CTABanner";
 
@@ -100,27 +101,18 @@ export default function AboutPage() {
               The person behind the <em>engine.</em>
             </h2>
 
-            <figure className="grid grid-cols-1 sm:grid-cols-12 gap-8 items-end">
-              {/* Photo — drop the headshot at public/team/sadeem-sattar.jpg
-                  and it fills this panel. Until then, a styled monogram shows.
-                  Using a CSS background (not next/image) so a missing file
-                  degrades gracefully instead of failing the build. */}
-              <div className="sm:col-span-5">
-                <div
-                  className="relative aspect-[4/5] overflow-hidden border border-hairline flex items-center justify-center bg-cover bg-top"
-                  style={{
-                    backgroundImage:
-                      "linear-gradient(160deg, rgba(244,244,239,0) 40%, rgba(24,1,171,0.08) 100%), url('/team/sadeem-sattar.jpg')",
-                    backgroundColor: "#F4F4EF",
-                  }}
-                >
-                  <span
-                    className="display italic text-6xl text-blue/30 select-none"
-                    aria-hidden="true"
-                  >
-                    SS
-                  </span>
-                </div>
+            <figure className="grid grid-cols-1 sm:grid-cols-12 gap-8 md:gap-10 items-end">
+              {/* Portrait is pre-cropped to 4:5 with the site's bone tone behind
+                  it, so it needs no overlay and no forced aspect box here. */}
+              <div className="sm:col-span-5 max-w-[260px] sm:max-w-none">
+                <Image
+                  src="/team/sadeem-sattar.jpg"
+                  alt="Sadeem Sattar, CEO and Founder of AIG Force"
+                  width={694}
+                  height={868}
+                  sizes="(min-width: 1024px) 340px, (min-width: 640px) 38vw, 260px"
+                  className="w-full h-auto border border-hairline"
+                />
               </div>
 
               <figcaption className="sm:col-span-7 pb-2">

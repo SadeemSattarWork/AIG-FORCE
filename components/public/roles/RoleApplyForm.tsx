@@ -3,29 +3,34 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { Upload } from "lucide-react";
 import { countryCodes, defaultCountry } from "@/lib/country-codes";
 import { PhoneCodeSelect } from "@/components/public/roles/PhoneCodeSelect";
-
-const schema = z.object({
-  firstName: z.string().min(1, "Please enter your first name"),
-  lastName: z.string().min(1, "Please enter your last name"),
-  email: z.string().email("Please enter a valid email address"),
-  phone: z.string().min(6, "Please enter a valid phone number"),
-  linkedin: z.string().url("Please enter a valid URL").optional().or(z.literal("")),
-});
-
-type FormData = z.infer<typeof schema>;
+import { submitApplication } from "@/app/actions/apply";
+import {
+  applicationFormSchema,
+  RESUME_MAX_BYTES,
+  RESUME_MAX_LABEL,
+  RESUME_MIME,
+  type ApplicationFormData,
+  type FormState,
+} from "@/lib/forms";
 
 const fieldClass =
   "w-full bg-paper border border-hairline px-4 py-3 text-ink text-sm placeholder:text-muted/50 focus:outline-none focus:border-blue transition-colors";
 const labelClass = "block text-xs font-medium text-ink mb-1.5";
 const errorClass = "text-red-600 text-xs mt-1.5";
 
-export function RoleApplyForm({ roleTitle }: { roleTitle: string }) {
-  const [submitted, setSubmitted] = useState(false);
+export function RoleApplyForm({
+  roleTitle,
+  roleSlug,
+}: {
+  roleTitle: string;
+  roleSlug: string;
+}) {
+  const [state, setState] = useState<FormState>({ status: "idle" });
   const [resume, setResume] = useState<File | null>(null);
+  const [resumeError, setResumeError] = useState<string | null>(null);
   const [countryIso, setCountryIso] = useState(defaultCountry.iso);
 
   const dial =
@@ -35,24 +40,55 @@ export function RoleApplyForm({ roleTitle }: { roleTitle: string }) {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<FormData>({ resolver: zodResolver(schema) });
+  } = useForm<ApplicationFormData>({ resolver: zodResolver(applicationFormSchema) });
 
-  const onSubmit = async (data: FormData) => {
-    // TEMPORARY: opens the user's email client with the application details.
-    // Backend is coming — replace this block with a POST to the applications
-    // endpoint. `resume` holds the selected File; send it as multipart/form-data
-    // (mailto cannot attach files, which is why only the filename is sent today).
-    const subject = encodeURIComponent(`Application: ${roleTitle}`);
-    const body = encodeURIComponent(
-      `Role: ${roleTitle}\nName: ${data.firstName} ${data.lastName}\nEmail: ${data.email}\nPhone: ${dial} ${data.phone}\nLinkedIn: ${data.linkedin || "N/A"}\nResume: ${resume?.name ?? "not attached"}`
-    );
-    window.location.assign(
-      `mailto:support@aigforce.com?subject=${subject}&body=${body}`
-    );
-    setSubmitted(true);
+  // Checked here as well as in the action so an oversized PDF fails instantly
+  // instead of after a round trip that the body-size limit would reject anyway.
+  const onPickFile = (file: File | null) => {
+    setResumeError(null);
+    if (!file) return setResume(null);
+    if (file.type !== RESUME_MIME) {
+      setResume(null);
+      return setResumeError("Your résumé must be a PDF file.");
+    }
+    if (file.size > RESUME_MAX_BYTES) {
+      setResume(null);
+      return setResumeError(
+        `That file is over ${RESUME_MAX_LABEL}. Please attach a smaller PDF.`
+      );
+    }
+    setResume(file);
   };
 
-  if (submitted) {
+  const onSubmit = async (
+    data: ApplicationFormData,
+    event?: React.BaseSyntheticEvent
+  ) => {
+    if (!resume) {
+      return setResumeError("Please attach your résumé as a PDF.");
+    }
+
+    // Honeypot comes off the submitted form, not a ref, so nothing reads
+    // ref.current during render.
+    const form = event?.target as HTMLFormElement | undefined;
+    const trap = form ? String(new FormData(form).get("website") ?? "") : "";
+
+    const body = new FormData();
+    body.set("firstName", data.firstName);
+    body.set("lastName", data.lastName);
+    body.set("email", data.email);
+    body.set("phone", data.phone);
+    body.set("linkedin", data.linkedin ?? "");
+    body.set("dial", dial);
+    body.set("roleTitle", roleTitle);
+    body.set("roleSlug", roleSlug);
+    body.set("resume", resume);
+    body.set("website", trap);
+
+    setState(await submitApplication(body));
+  };
+
+  if (state.status === "success") {
     return (
       <div className="bg-bone border border-hairline p-8">
         <p className="eyebrow text-blue mb-4">Application received</p>
@@ -70,6 +106,16 @@ export function RoleApplyForm({ roleTitle }: { roleTitle: string }) {
     <div className="bg-bone border border-hairline p-7 md:p-8">
       <h2 className="display text-ink text-2xl mb-6">Interested?</h2>
       <form onSubmit={handleSubmit(onSubmit)} noValidate className="flex flex-col gap-5">
+        {/* Honeypot — off-screen and hidden from assistive tech. Only bots fill it. */}
+        <input
+          type="text"
+          name="website"
+          tabIndex={-1}
+          autoComplete="off"
+          aria-hidden="true"
+          className="absolute -left-[9999px] w-px h-px opacity-0"
+        />
+
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label htmlFor="firstName" className={labelClass}>First name</label>
@@ -106,13 +152,17 @@ export function RoleApplyForm({ roleTitle }: { roleTitle: string }) {
         </div>
 
         <div>
-          <label htmlFor="linkedin" className={labelClass}>LinkedIn profile URL</label>
+          <label htmlFor="linkedin" className={labelClass}>
+            LinkedIn profile URL <span className="text-muted font-normal">(optional)</span>
+          </label>
           <input id="linkedin" type="url" placeholder="Enter your LinkedIn URL" className={fieldClass} {...register("linkedin")} />
           {errors.linkedin && <p className={errorClass}>{errors.linkedin.message}</p>}
         </div>
 
         <div>
-          <label htmlFor="resume" className={labelClass}>Upload your resume (in English)</label>
+          <label htmlFor="resume" className={labelClass}>
+            Upload your résumé in English <span className="text-muted font-normal">(PDF, max {RESUME_MAX_LABEL})</span>
+          </label>
           <label
             htmlFor="resume"
             className="flex items-center justify-center gap-2 border border-dashed border-hairline bg-paper px-4 py-4 text-sm text-muted hover:border-blue cursor-pointer transition-colors"
@@ -125,9 +175,16 @@ export function RoleApplyForm({ roleTitle }: { roleTitle: string }) {
             type="file"
             accept="application/pdf"
             className="sr-only"
-            onChange={(e) => setResume(e.target.files?.[0] ?? null)}
+            onChange={(e) => onPickFile(e.target.files?.[0] ?? null)}
           />
+          {resumeError && <p className={errorClass}>{resumeError}</p>}
         </div>
+
+        {state.status === "error" && (
+          <div role="alert" className="border-l-2 border-red-600 bg-paper px-5 py-4">
+            <p className="text-sm text-ink leading-relaxed">{state.message}</p>
+          </div>
+        )}
 
         <button
           type="submit"

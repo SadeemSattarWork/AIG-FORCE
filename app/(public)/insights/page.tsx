@@ -46,10 +46,9 @@ export default function InsightsPage() {
                     <h2 className="display text-ink text-3xl md:text-4xl mb-5 max-w-2xl">
                       {insight.title}
                     </h2>
-                    <p className="text-sm md:text-base text-muted leading-relaxed max-w-2xl mb-6">
+                    <p className="text-sm md:text-base text-muted leading-relaxed max-w-2xl">
                       {insight.excerpt}
                     </p>
-                    <p className="machine text-muted">Coming soon</p>
                   </div>
                 </article>
               </li>

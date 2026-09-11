@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ContactForm } from "./ContactForm";
+import { SUPPORT_EMAIL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Get in Touch",
@@ -28,10 +29,10 @@ export default function ContactPage() {
               <div>
                 <p className="eyebrow text-muted mb-4">Email</p>
                 <a
-                  href="mailto:support@aigforce.com"
+                  href={`mailto:${SUPPORT_EMAIL}`}
                   className="text-ink text-lg hover:text-blue transition-colors"
                 >
-                  support@aigforce.com
+                  {SUPPORT_EMAIL}
                 </a>
               </div>
               <div>

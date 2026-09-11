@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   },
   description:
     "AIG Force connects companies with rigorously vetted domain experts in Biology, Software Engineering, Legal, Medical, and Finance. Hire elite specialists within 48 hours.",
-  metadataBase: new URL("https://aigforce.com"),
+  metadataBase: new URL("https://aigforce.co"),
   keywords: [
     "domain expert recruitment",
     "hire specialists",
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     "finance experts",
     "expert network",
   ],
-  authors: [{ name: "AIG Force", url: "https://aigforce.com" }],
+  authors: [{ name: "AIG Force", url: "https://aigforce.co" }],
   creator: "AIG Force",
   publisher: "AIG Force",
   robots: {
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://aigforce.com",
+    url: "https://aigforce.co",
     siteName: "AIG Force",
     title: "AIG Force | Domain Expert Recruitment",
     description:

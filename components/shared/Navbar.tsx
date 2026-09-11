@@ -3,10 +3,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { Menu, X, ChevronDown, Mail } from "lucide-react";
-import { LinkedInIcon } from "@/components/shared/LinkedInIcon";
+import { Menu, X, ChevronDown, Mail, Phone } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { domains } from "@/lib/domains";
+import { SUPPORT_EMAIL, PHONE_E164, PHONE_DISPLAY } from "@/lib/site";
 
 type MenuKey = "solutions" | "expertise" | null;
 
@@ -160,20 +160,22 @@ export function Navbar() {
           </Link>
           <span className="w-px h-4 bg-hairline" aria-hidden="true" />
           <a
-            href="mailto:support@aigforce.com"
+            href={`tel:${PHONE_E164}`}
+            aria-label={`Call AIG Force on ${PHONE_DISPLAY}`}
+            className="text-ink hover:text-blue transition-colors inline-flex items-center gap-2"
+          >
+            <Phone size={15} strokeWidth={1.8} />
+            {/* Number stays visible where there's room; the icon carries it below xl */}
+            <span className="hidden xl:inline text-sm tabular-nums">
+              {PHONE_DISPLAY}
+            </span>
+          </a>
+          <a
+            href={`mailto:${SUPPORT_EMAIL}`}
             aria-label="Email AIG Force"
             className="text-ink hover:text-blue transition-colors"
           >
             <Mail size={15} strokeWidth={1.8} />
-          </a>
-          <a
-            href="https://www.linkedin.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="AIG Force on LinkedIn"
-            className="text-ink hover:text-blue transition-colors"
-          >
-            <LinkedInIcon size={15} />
           </a>
         </div>
 
@@ -241,6 +243,23 @@ export function Navbar() {
           >
             Contact us <span className="arrow">↗</span>
           </Link>
+
+          <div className="mt-10 pt-8 border-t border-hairline flex flex-col gap-4">
+            <a
+              href={`tel:${PHONE_E164}`}
+              className="inline-flex items-center gap-3 text-ink hover:text-blue transition-colors"
+            >
+              <Phone size={16} strokeWidth={1.8} />
+              <span className="text-base tabular-nums">{PHONE_DISPLAY}</span>
+            </a>
+            <a
+              href={`mailto:${SUPPORT_EMAIL}`}
+              className="inline-flex items-center gap-3 text-ink hover:text-blue transition-colors"
+            >
+              <Mail size={16} strokeWidth={1.8} />
+              <span className="text-base">{SUPPORT_EMAIL}</span>
+            </a>
+          </div>
         </div>
       )}
     </header>

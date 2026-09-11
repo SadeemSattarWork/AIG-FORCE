@@ -1,7 +1,8 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Mail } from "lucide-react";
-import { LinkedInIcon } from "@/components/shared/LinkedInIcon";
 import { domains } from "@/lib/domains";
+import { SUPPORT_EMAIL } from "@/lib/site";
 
 const solutionsLinks = [
   { href: "/for-companies", label: "For Companies" },
@@ -18,8 +19,8 @@ const companyLinks = [
 ];
 
 const legalLinks = [
-  { href: "#", label: "Privacy Policy" },
-  { href: "#", label: "Terms of Service" },
+  { href: "/privacy", label: "Privacy Policy" },
+  { href: "/terms", label: "Terms of Service" },
 ];
 
 export function Footer() {
@@ -27,16 +28,15 @@ export function Footer() {
     <footer className="bg-ink text-white">
       <div className="max-w-7xl mx-auto px-6 pt-20 pb-10">
 
-        {/* Wordmark lockup — the logo art is dark-on-transparent, so the
-            footer carries a white text lockup instead */}
-        <Link href="/" className="inline-flex items-baseline gap-2 mb-16 group">
-          <span className="w-2.5 h-2.5 rounded-full bg-wire self-center" aria-hidden="true" />
-          <span className="text-2xl font-bold tracking-tight text-white">
-            AiG
-          </span>
-          <span className="display text-2xl italic text-wire group-hover:text-white transition-colors">
-            Force
-          </span>
+        {/* Light-on-dark twin of the mark, generated from public/logo.png */}
+        <Link href="/" className="inline-block mb-16">
+          <Image
+            src="/logo-light.png"
+            alt="AIG Force"
+            width={193}
+            height={95}
+            className="h-11 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity"
+          />
         </Link>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-12 mb-20">
@@ -116,24 +116,13 @@ export function Footer() {
             ))}
           </div>
 
-          <div className="flex items-center gap-5">
-            <a
-              href="mailto:support@aigforce.com"
-              aria-label="Email AIG Force"
-              className="text-white/60 hover:text-white transition-colors"
-            >
-              <Mail size={16} strokeWidth={1.8} />
-            </a>
-            <a
-              href="https://www.linkedin.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="AIG Force on LinkedIn"
-              className="text-white/60 hover:text-white transition-colors"
-            >
-              <LinkedInIcon size={16} />
-            </a>
-          </div>
+          <a
+            href={`mailto:${SUPPORT_EMAIL}`}
+            className="inline-flex items-center gap-2.5 text-white/60 hover:text-white transition-colors"
+          >
+            <Mail size={16} strokeWidth={1.8} />
+            <span className="text-xs">{SUPPORT_EMAIL}</span>
+          </a>
         </div>
       </div>
     </footer>

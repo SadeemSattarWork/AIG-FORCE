@@ -120,7 +120,7 @@ export default async function RoleDetailPage(
           {/* Right — application form (sticky) */}
           <div className="lg:col-span-5">
             <div className="lg:sticky lg:top-28">
-              <RoleApplyForm roleTitle={role.title} />
+              <RoleApplyForm roleTitle={role.title} roleSlug={role.slug} />
             </div>
           </div>
         </div>
