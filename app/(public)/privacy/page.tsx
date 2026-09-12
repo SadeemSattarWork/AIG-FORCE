@@ -32,7 +32,7 @@ const sections: LegalSection[] = [
       },
       {
         term: "Your résumé",
-        text: "A résumé typically contains work history, education, skills and qualifications. Please do not include information you would rather not share, such as your date of birth, marital status, health information or a photograph — none of it is required.",
+        text: "A résumé typically contains work history, education, skills and qualifications. Please do not include information you would rather not share, such as your date of birth, marital status, health information or a photograph. None of it is required.",
       },
       {
         term: "Assessment data",
@@ -102,7 +102,7 @@ const sections: LegalSection[] = [
       },
       {
         term: "Legitimate interests",
-        text: "Responding to enquiries, running and securing the platform, and maintaining our expert network — balanced against your rights and freedoms.",
+        text: "Responding to enquiries, running and securing the platform, and maintaining our expert network, balanced against your rights and freedoms.",
       },
       {
         term: "Consent",
@@ -151,7 +151,7 @@ const sections: LegalSection[] = [
     bullets: [
       {
         term: "Strictly necessary",
-        text: "Required for the site to work — keeping your session, remembering form state and protecting submissions against cross-site request forgery. These are always on and need no consent.",
+        text: "Required for the site to work: keeping your session, remembering form state and protecting submissions against cross-site request forgery. These are always on and need no consent.",
       },
       {
         term: "Analytics",
@@ -202,7 +202,7 @@ const sections: LegalSection[] = [
   {
     heading: "International transfers",
     paras: [
-      "We operate across more than 60 countries, so your data may be transferred outside the UK — for example to a hiring company in another country, or to a service provider hosting data abroad.",
+      "We operate across more than 60 countries, so your data may be transferred outside the UK, for example to a hiring company in another country, or to a service provider hosting data abroad.",
       "Where we transfer personal data outside the UK, we rely on UK adequacy regulations or on the International Data Transfer Agreement or Addendum, together with appropriate additional safeguards.",
     ],
   },

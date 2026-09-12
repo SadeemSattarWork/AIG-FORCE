@@ -16,7 +16,7 @@ type Props = {
   sections: LegalSection[];
 };
 
-/* Shared shell for /privacy and /terms — same editorial grid as the rest of
+/* Shared shell for /privacy and /terms, same editorial grid as the rest of
    the site, with the revision date parked in the sticky left column. */
 export function LegalDoc({ title, updated, intro, sections }: Props) {
   return (

@@ -44,7 +44,7 @@ const sections: LegalSection[] = [
     heading: "Introductions and non-circumvention",
     paras: [
       "AIG Force invests in building and maintaining its relationships with Clients, and those relationships are the value we provide. Where we introduce you to a Client, whether directly or indirectly, that introduction is made in confidence.",
-      "For 24 months from the date of an introduction, you agree not to provide services to that Client — whether paid or unpaid, directly or through any other company, agency or intermediary — without our prior written consent. Consent will not be unreasonably withheld, and we will normally agree where a fair transfer fee is settled.",
+      "For 24 months from the date of an introduction, you agree not to provide services to that Client, whether paid or unpaid, directly or through any other company, agency or intermediary, without our prior written consent. Consent will not be unreasonably withheld, and we will normally agree where a fair transfer fee is settled.",
       "This restriction protects our legitimate business interests and goes no further than necessary. A breach is a material breach of this agreement and may result in a claim for the fees we would have earned.",
     ],
   },
