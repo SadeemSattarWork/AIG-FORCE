@@ -1,6 +1,11 @@
 "use server";
 
-import { contactSchema, contactDomainOptions, type FormState } from "@/lib/forms";
+import {
+  contactSchema,
+  contactDomainOptions,
+  contactIntents,
+  type FormState,
+} from "@/lib/forms";
 import { sendToSupport, emailShell, row } from "@/lib/email";
 import { saveEnquiry } from "@/lib/db";
 import { enquiryReceived, sendCandidateEmail } from "@/lib/candidate-emails";
@@ -26,21 +31,31 @@ export async function submitContact(
 
   const d = parsed.data;
   const domainLabel =
-    contactDomainOptions.find((o) => o.value === d.domain)?.label ?? d.domain;
+    contactDomainOptions.find((o) => o.value === d.domain)?.label ??
+    "Not specified";
+  const intentLabel =
+    contactIntents.find((o) => o.value === d.intent)?.label ?? d.intent;
+  const subject = {
+    hiring: `Hiring enquiry from ${d.name}${d.company ? ` (${d.company})` : ""}`,
+    expert: `Expert enquiry from ${d.name}`,
+    other: `New enquiry from ${d.name}`,
+  }[d.intent];
 
   // The row is the record; the email is the notification. Store first so a
   // mail outage can never lose an enquiry.
   const stored = await saveEnquiry(d);
 
   const mailed = await sendToSupport({
-    subject: `New enquiry — ${d.name}${d.company ? ` (${d.company})` : ""}`,
+    subject,
     replyTo: d.email,
     html: emailShell({
-      heading: "New website enquiry",
+      heading: subject,
       rows: [
+        row("They are", intentLabel),
         row("Name", d.name),
         row("Email", d.email),
-        row("Company", d.company || "—"),
+        row("Phone", d.phone || "Not given"),
+        row("Company", d.company || "Not given"),
         row("Domain", domainLabel),
       ].join(""),
       body: { label: "Message", text: d.message },

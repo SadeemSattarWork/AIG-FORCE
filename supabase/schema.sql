@@ -8,9 +8,13 @@
 create table if not exists public.enquiries (
   id          uuid primary key default gen_random_uuid(),
   created_at  timestamptz not null default now(),
+  -- who is writing: a company hiring, an expert, or something else
+  intent      text        not null default 'other'
+              check (intent in ('hiring','expert','other')),
   name        text        not null,
   email       text        not null,
   company     text,
+  phone       text,
   domain      text        not null,
   message     text        not null,
   -- workflow state for whoever works the inbox
@@ -19,7 +23,15 @@ create table if not exists public.enquiries (
   notes       text
 );
 
+-- Upgrade path for databases created before intent/phone existed. No-ops on
+-- a fresh install.
+alter table public.enquiries
+  add column if not exists intent text not null default 'other'
+    check (intent in ('hiring','expert','other')),
+  add column if not exists phone text;
+
 create index if not exists enquiries_created_at_idx on public.enquiries (created_at desc);
+create index if not exists enquiries_intent_idx     on public.enquiries (intent);
 create index if not exists enquiries_status_idx     on public.enquiries (status);
 create index if not exists enquiries_email_idx      on public.enquiries (email);
 

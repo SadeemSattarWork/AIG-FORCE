@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import Link from "next/link";
 import { domains, getDomainBySlug } from "@/lib/domains";
 import { DomainCard } from "@/components/public/experts/DomainCard";
 import { PageHero } from "@/components/shared/PageHero";
@@ -99,6 +100,28 @@ export default async function DomainPage(props: PageProps<"/experts/[domain]">) 
         </div>
       </section>
 
+      {/* For experts — every domain page invites specialists into the network */}
+      <section className="bg-ink px-6 py-20 md:py-28">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8">
+          <div className="md:col-span-3">
+            <p className="eyebrow text-white/50">For experts</p>
+          </div>
+          <div className="md:col-span-9 lg:col-span-8">
+            <h2 className="display text-white text-3xl md:text-5xl mb-6 max-w-2xl">
+              Are you a {d.name.toLowerCase()} <em>specialist?</em>
+            </h2>
+            <p className="text-white/60 text-base md:text-lg leading-relaxed max-w-xl mb-10">
+              Join a network where your depth is measured, not skimmed. One
+              structured interview puts your work in front of companies hiring
+              for exactly this expertise, remotely and on your terms.
+            </p>
+            <Link href="/for-experts/roles" className="arrow-link text-white">
+              Join our expert network <span className="arrow">↗</span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Related domains */}
       {related.length > 0 && (
         <section className="bg-paper px-6 py-20 md:py-28">
@@ -125,6 +148,8 @@ export default async function DomainPage(props: PageProps<"/experts/[domain]">) 
         subtext="Submit your brief and receive a ranked shortlist within 48 hours."
         buttonLabel="Start hiring"
         href="/contact"
+        secondaryLabel="Join our expert network"
+        secondaryHref="/for-experts/roles"
       />
     </>
   );

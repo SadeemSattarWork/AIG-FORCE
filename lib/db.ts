@@ -23,10 +23,12 @@ export async function saveEnquiry(d: ContactData): Promise<StoreResult> {
   const { data, error } = await db
     .from("enquiries")
     .insert({
+      intent: d.intent,
       name: d.name,
       email: d.email,
       company: d.company || null,
-      domain: d.domain,
+      phone: d.phone || null,
+      domain: d.domain || "other",
       message: d.message,
     })
     .select("id")

@@ -14,17 +14,38 @@ const domainValues = contactDomainOptions.map((o) => o.value);
    it, so browser-side validation and server-side validation can never drift.
    Never trust the client copy — the action re-parses every submission. */
 
+export const contactIntents = [
+  { value: "hiring", label: "I'm hiring" },
+  { value: "expert", label: "I'm an expert" },
+  { value: "other", label: "Something else" },
+] as const;
+
+export type ContactIntent = (typeof contactIntents)[number]["value"];
+
 export const contactSchema = z.object({
-  name: z.string().trim().min(2, "Name must be at least 2 characters").max(120),
+  intent: z.enum(["hiring", "expert", "other"]),
+  name: z.string().trim().min(2, "Please enter your name").max(120),
   email: z.email("Please enter a valid email address").max(200),
   company: z.string().trim().max(160).optional(),
+  phone: z
+    .string()
+    .trim()
+    .max(40)
+    .optional()
+    .refine(
+      (v) => !v || /^\+?[\d\s().\/-]{6,}$/.test(v),
+      "Please enter a valid phone number"
+    ),
+  // Optional on purpose: a required dropdown is friction for a company that
+  // just wants to talk. Blank is stored as "other".
   domain: z
     .string()
-    .refine((v) => domainValues.includes(v), "Please select a domain of interest"),
+    .optional()
+    .refine((v) => !v || domainValues.includes(v), "Please select a domain"),
   message: z
     .string()
     .trim()
-    .min(10, "Message must be at least 10 characters")
+    .min(10, "Tell us a little more, at least 10 characters")
     .max(5000, "Message must be under 5000 characters"),
 });
 

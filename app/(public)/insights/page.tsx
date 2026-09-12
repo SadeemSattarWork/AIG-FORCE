@@ -35,29 +35,35 @@ export default function InsightsPage() {
                     : "py-12 md:py-16 border-b border-hairline"
                 }
               >
-                <article className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8">
-                  <div className="md:col-span-3 flex md:flex-col gap-4 md:gap-3">
-                    <span className="machine text-muted">{insight.date}</span>
-                    <span className="machine text-blue">
-                      {insight.tag.toLowerCase()}
-                    </span>
-                  </div>
-                  <div className="md:col-span-8">
-                    <h2 className="display text-ink text-3xl md:text-4xl mb-5 max-w-2xl">
-                      {insight.title}
-                    </h2>
-                    <p className="text-sm md:text-base text-muted leading-relaxed max-w-2xl">
-                      {insight.excerpt}
-                    </p>
-                  </div>
-                </article>
+                <Link href={`/insights/${insight.slug}`} className="group block">
+                  <article className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8">
+                    <div className="md:col-span-3 flex md:flex-col gap-4 md:gap-3">
+                      <span className="machine text-muted">{insight.date}</span>
+                      <span className="machine text-blue">
+                        {insight.tag.toLowerCase()}
+                      </span>
+                      <span className="machine text-muted">{insight.readTime} read</span>
+                    </div>
+                    <div className="md:col-span-8">
+                      <h2 className="display text-ink text-3xl md:text-4xl mb-5 max-w-2xl group-hover:text-blue transition-colors">
+                        {insight.title}
+                      </h2>
+                      <p className="text-sm md:text-base text-muted leading-relaxed max-w-2xl mb-6">
+                        {insight.excerpt}
+                      </p>
+                      <span className="arrow-link text-blue">
+                        Read more <span className="arrow">↗</span>
+                      </span>
+                    </div>
+                  </article>
+                </Link>
               </li>
             ))}
           </ul>
 
           <div className="border-t border-hairline pt-12 mt-4">
             <p className="text-sm text-muted mb-6 max-w-md">
-              Want these in your inbox when they publish? Say hello and
+              Want new pieces in your inbox as they publish? Say hello and
               we&apos;ll add you to the list.
             </p>
             <Link href="/contact" className="arrow-link text-blue">

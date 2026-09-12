@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { domains } from "@/lib/domains";
 import { roles } from "@/lib/roles";
+import { insights } from "@/lib/insights";
 import { SITE_URL } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -33,6 +34,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: "monthly" as const,
       priority: 0.8,
+    })),
+    ...insights.map((i) => ({
+      url: url(`/insights/${i.slug}`),
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
     })),
     ...roles.map((r) => ({
       url: url(`/for-experts/roles/${r.slug}`),

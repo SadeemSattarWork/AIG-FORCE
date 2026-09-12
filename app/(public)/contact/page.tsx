@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ContactForm } from "./ContactForm";
-import { SUPPORT_EMAIL } from "@/lib/site";
+import { SUPPORT_EMAIL, PHONE_DISPLAY, PHONE_E164 } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Get in Touch",
@@ -17,6 +17,10 @@ export default function ContactPage() {
           <h1 className="display text-ink text-4xl md:text-6xl lg:text-7xl max-w-3xl">
             Let&apos;s <em>talk.</em>
           </h1>
+          <p className="text-muted text-base md:text-lg max-w-2xl leading-relaxed mt-8">
+            Tell us what you need. A person reads every message and replies
+            within one business day.
+          </p>
         </div>
       </section>
 
@@ -33,6 +37,15 @@ export default function ContactPage() {
                   className="text-ink text-lg hover:text-blue transition-colors"
                 >
                   {SUPPORT_EMAIL}
+                </a>
+              </div>
+              <div>
+                <p className="eyebrow text-muted mb-4">Phone</p>
+                <a
+                  href={`tel:${PHONE_E164}`}
+                  className="text-ink text-lg hover:text-blue transition-colors tabular-nums"
+                >
+                  {PHONE_DISPLAY}
                 </a>
               </div>
               <div>
