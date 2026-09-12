@@ -264,3 +264,8 @@ export const insights: Insight[] = [
 export function getInsightBySlug(slug: string): Insight | undefined {
   return insights.find((i) => i.slug === slug);
 }
+
+/** Stable anchor id for a section heading, shared by the page and the nav. */
+export function headingAnchor(text: string): string {
+  return text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+}

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { insights, getInsightBySlug } from "@/lib/insights";
+import { insights, getInsightBySlug, headingAnchor } from "@/lib/insights";
 import { InsightCover } from "@/components/public/insights/InsightCover";
 import { ArticleNav } from "@/components/public/insights/ArticleNav";
 import { ArticleBody } from "@/components/public/insights/ArticleBody";
@@ -19,9 +19,6 @@ export async function generateMetadata(
   if (!insight) return {};
   return { title: insight.title, description: insight.excerpt };
 }
-
-const anchor = (text: string) =>
-  text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 
 export default async function InsightPage(props: PageProps<"/insights/[slug]">) {
   const { slug } = await props.params;
@@ -64,7 +61,7 @@ export default async function InsightPage(props: PageProps<"/insights/[slug]">) 
                 <div className="hidden md:block mt-8">
                   <ArticleNav
                     items={headings.map((h) => ({
-                      id: anchor(h.heading!),
+                      id: headingAnchor(h.heading!),
                       label: h.heading!,
                     }))}
                   />
@@ -73,7 +70,7 @@ export default async function InsightPage(props: PageProps<"/insights/[slug]">) 
             </div>
           </aside>
 
-          <ArticleBody sections={insight.sections} anchor={anchor} />
+          <ArticleBody sections={insight.sections} />
         </div>
       </section>
 

@@ -2,18 +2,12 @@
 
 import { useRef } from "react";
 import { motion, useReducedMotion, useScroll, useSpring } from "framer-motion";
-import type { InsightSection } from "@/lib/insights";
+import { headingAnchor, type InsightSection } from "@/lib/insights";
 
 /* Article prose with two quiet pieces of motion: a reading-progress rail
    pinned under the navbar, and each section rising in as it enters view.
    Both switch off for readers who prefer reduced motion. */
-export function ArticleBody({
-  sections,
-  anchor,
-}: {
-  sections: InsightSection[];
-  anchor: (text: string) => string;
-}) {
+export function ArticleBody({ sections }: { sections: InsightSection[] }) {
   const reduce = useReducedMotion();
   const ref = useRef<HTMLElement>(null);
 
@@ -44,7 +38,7 @@ export function ArticleBody({
         {sections.map((section, si) => (
           <motion.div
             key={section.heading ?? `intro-${si}`}
-            id={section.heading ? anchor(section.heading) : undefined}
+            id={section.heading ? headingAnchor(section.heading) : undefined}
             className="scroll-mt-28"
             {...rise}
           >
