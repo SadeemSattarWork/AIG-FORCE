@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
-import { SUPPORT_EMAIL, PHONE_DISPLAY, PHONE_E164, SITE_URL } from "@/lib/site";
+import { SUPPORT_EMAIL, SITE_URL } from "@/lib/site";
 import { escapeHtml, type Attachment } from "@/lib/email";
 
 /* Branded email shell.
@@ -108,8 +108,6 @@ export function renderEmail(opts: {
     <tr><td style="padding:24px 40px;background:${BONE};border-top:1px solid ${HAIRLINE}">
       <p style="margin:0 0 6px;font-family:${SANS};font-size:12px;color:${MUTED}">
         <a href="mailto:${SUPPORT_EMAIL}" style="color:${BLUE};text-decoration:none">${SUPPORT_EMAIL}</a>
-        &nbsp;&middot;&nbsp;
-        <a href="tel:${PHONE_E164}" style="color:${BLUE};text-decoration:none">${PHONE_DISPLAY}</a>
       </p>
       <p style="margin:0;font-family:${SANS};font-size:11px;color:${MUTED};opacity:.75">
         AIG Force &middot; Intelligent hiring for a changing workforce &middot;

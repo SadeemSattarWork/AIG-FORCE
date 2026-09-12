@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ContactForm } from "./ContactForm";
-import { SUPPORT_EMAIL, PHONE_DISPLAY, PHONE_E164 } from "@/lib/site";
+import Link from "next/link";
+import { SUPPORT_EMAIL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Get in Touch",
@@ -13,13 +14,13 @@ export default function ContactPage() {
     <>
       <section className="bg-bone px-6 pt-40 pb-16 md:pt-48 md:pb-24">
         <div className="max-w-7xl mx-auto">
-          <p className="eyebrow text-blue mb-8">Contact</p>
+          <p className="eyebrow text-blue mb-8">For companies</p>
           <h1 className="display text-ink text-4xl md:text-6xl lg:text-7xl max-w-3xl">
             Let&apos;s <em>talk.</em>
           </h1>
           <p className="text-muted text-base md:text-lg max-w-2xl leading-relaxed mt-8">
-            Tell us what you need. A person reads every message and replies
-            within one business day.
+            Tell us who you need. A person reads every brief and replies
+            within one business day with how we&apos;d approach it.
           </p>
         </div>
       </section>
@@ -40,15 +41,6 @@ export default function ContactPage() {
                 </a>
               </div>
               <div>
-                <p className="eyebrow text-muted mb-4">Phone</p>
-                <a
-                  href={`tel:${PHONE_E164}`}
-                  className="text-ink text-lg hover:text-blue transition-colors tabular-nums"
-                >
-                  {PHONE_DISPLAY}
-                </a>
-              </div>
-              <div>
                 <p className="eyebrow text-muted mb-4">Response time</p>
                 <p className="text-ink text-lg">Within 1 business day</p>
               </div>
@@ -60,6 +52,21 @@ export default function ContactPage() {
                   5 domains
                   <br />
                   Remote-first
+                </p>
+              </div>
+              <div className="border-t border-hairline pt-8">
+                <p className="eyebrow text-muted mb-4">Experts</p>
+                <p className="text-sm text-muted leading-relaxed">
+                  This form is for companies. If you&apos;re an expert, apply
+                  through{" "}
+                  <Link href="/for-experts/roles" className="text-blue hover:underline">
+                    Opportunities
+                  </Link>
+                  , or email{" "}
+                  <a href={`mailto:${SUPPORT_EMAIL}`} className="text-blue hover:underline">
+                    {SUPPORT_EMAIL}
+                  </a>
+                  .
                 </p>
               </div>
             </div>

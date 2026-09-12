@@ -94,7 +94,7 @@ export function enquiryReceived(name: string) {
       heading: "Thanks for getting in touch.",
       blocks: [
         { type: "lead", text: `Hi ${name}, your message has reached us.` },
-        { type: "text", text: "Someone will read it properly and reply within one business day. If it's urgent, the phone number in the footer reaches us directly." },
+        { type: "text", text: "Someone will read it properly and reply within one business day. If anything changes in the meantime, just reply to this email." },
       ],
       signOff: "The AIG Force team",
     }),

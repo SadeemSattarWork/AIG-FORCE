@@ -7,7 +7,6 @@ export type InsightSection = {
 export type Insight = {
   slug: string;
   title: string;
-  date: string;
   tag: string;
   excerpt: string;
   readTime: string;
@@ -18,7 +17,6 @@ export const insights: Insight[] = [
   {
     slug: "end-of-the-first-round-phone-screen",
     title: "The end of the first-round phone screen",
-    date: "21 May 2026",
     tag: "AI interviews",
     readTime: "5 min",
     excerpt:
@@ -70,7 +68,6 @@ export const insights: Insight[] = [
   {
     slug: "what-an-ai-interviewer-actually-measures",
     title: "What an AI interviewer actually measures",
-    date: "15 May 2026",
     tag: "AI interviews",
     readTime: "6 min",
     excerpt:
@@ -127,7 +124,6 @@ export const insights: Insight[] = [
   {
     slug: "hiring-globally-without-the-compliance-headache",
     title: "Hiring globally without the compliance headache",
-    date: "11 May 2026",
     tag: "Global talent",
     readTime: "5 min",
     excerpt:
@@ -172,7 +168,6 @@ export const insights: Insight[] = [
   {
     slug: "five-mistakes-companies-make-hiring-specialists",
     title: "Five mistakes companies make when hiring specialists",
-    date: "4 May 2026",
     tag: "Hiring ops",
     readTime: "5 min",
     excerpt:
@@ -223,7 +218,6 @@ export const insights: Insight[] = [
   {
     slug: "resume-parsing-is-solved-ranking-isnt",
     title: "Résumé parsing is a solved problem. Ranking isn't.",
-    date: "28 Apr 2026",
     tag: "Hiring ops",
     readTime: "4 min",
     excerpt:

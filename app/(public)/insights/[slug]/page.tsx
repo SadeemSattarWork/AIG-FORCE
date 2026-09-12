@@ -3,6 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { insights, getInsightBySlug } from "@/lib/insights";
 import { InsightCover } from "@/components/public/insights/InsightCover";
+import { ArticleNav } from "@/components/public/insights/ArticleNav";
+import { ArticleBody } from "@/components/public/insights/ArticleBody";
 import { CTABanner } from "@/components/shared/CTABanner";
 
 export function generateStaticParams() {
@@ -48,11 +50,7 @@ export default async function InsightPage(props: PageProps<"/insights/[slug]">) 
           <p className="text-muted text-base md:text-lg max-w-2xl leading-relaxed">
             {insight.excerpt}
           </p>
-          <div className="flex flex-wrap gap-x-8 gap-y-2 mt-10">
-            <span className="machine text-muted">{insight.date}</span>
-            <span className="machine text-muted">{insight.readTime} read</span>
-            <span className="machine text-muted">By the AIG Force team</span>
-          </div>
+          <p className="machine text-muted mt-10">{insight.readTime} read</p>
         </div>
       </section>
 
@@ -63,52 +61,19 @@ export default async function InsightPage(props: PageProps<"/insights/[slug]">) 
             <div className="md:sticky md:top-32">
               <InsightCover insight={insight} index={index} />
               {headings.length > 0 && (
-                <nav aria-label="In this piece" className="hidden md:block mt-8">
-                  <p className="eyebrow text-muted mb-4">In this piece</p>
-                  <ol className="space-y-2.5">
-                    {headings.map((s) => (
-                      <li key={s.heading}>
-                        <a
-                          href={`#${anchor(s.heading!)}`}
-                          className="text-sm text-muted hover:text-blue transition-colors leading-snug block"
-                        >
-                          {s.heading}
-                        </a>
-                      </li>
-                    ))}
-                  </ol>
-                </nav>
+                <div className="hidden md:block mt-8">
+                  <ArticleNav
+                    items={headings.map((h) => ({
+                      id: anchor(h.heading!),
+                      label: h.heading!,
+                    }))}
+                  />
+                </div>
               )}
             </div>
           </aside>
 
-          <article className="md:col-span-8 lg:col-span-7">
-            {insight.sections.map((section, si) => (
-              <div
-                key={section.heading ?? `intro-${si}`}
-                id={section.heading ? anchor(section.heading) : undefined}
-                className="scroll-mt-28"
-              >
-                {section.heading && (
-                  <h2 className="display text-ink text-2xl md:text-3xl mt-14 mb-5">
-                    {section.heading}
-                  </h2>
-                )}
-                {section.paragraphs.map((p, pi) => (
-                  <p
-                    key={pi}
-                    className={
-                      si === 0 && pi === 0
-                        ? "text-lg md:text-xl font-semibold text-ink leading-relaxed mb-6"
-                        : "text-base md:text-lg text-muted leading-relaxed mb-6"
-                    }
-                  >
-                    {p}
-                  </p>
-                ))}
-              </div>
-            ))}
-          </article>
+          <ArticleBody sections={insight.sections} anchor={anchor} />
         </div>
       </section>
 
@@ -125,8 +90,7 @@ export default async function InsightPage(props: PageProps<"/insights/[slug]">) 
             {more.map((m) => (
               <Link key={m.slug} href={`/insights/${m.slug}`} className="group block">
                 <InsightCover insight={m} index={insights.indexOf(m)} />
-                <span className="machine text-muted block mt-5 mb-3">{m.date}</span>
-                <h3 className="display text-ink text-xl md:text-2xl group-hover:text-blue transition-colors mb-4">
+                <h3 className="display text-ink text-xl md:text-2xl group-hover:text-blue transition-colors mt-5 mb-4">
                   {m.title}
                 </h3>
                 <span className="arrow-link text-blue">

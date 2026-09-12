@@ -26,7 +26,7 @@ export const contactSchema = z.object({
   intent: z.enum(["hiring", "expert", "other"]),
   name: z.string().trim().min(2, "Please enter your name").max(120),
   email: z.email("Please enter a valid email address").max(200),
-  company: z.string().trim().max(160).optional(),
+  company: z.string().trim().min(2, "Please enter your company").max(160),
   phone: z
     .string()
     .trim()
@@ -50,6 +50,11 @@ export const contactSchema = z.object({
 });
 
 export type ContactData = z.infer<typeof contactSchema>;
+
+/* The public form only serves companies, so intent is fixed server-side and
+   the phone field is gone; experts are pointed at support@ instead. */
+export const contactFormSchema = contactSchema.omit({ intent: true, phone: true });
+export type ContactFormData = z.infer<typeof contactFormSchema>;
 
 export const applicationSchema = z.object({
   firstName: z.string().trim().min(1, "Please enter your first name").max(80),
