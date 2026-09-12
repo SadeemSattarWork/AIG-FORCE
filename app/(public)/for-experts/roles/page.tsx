@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { roles } from "@/lib/roles";
 import { RolesBoard } from "@/components/public/roles/RolesBoard";
+import { networkStats } from "@/lib/stats";
 
 export const metadata: Metadata = {
   title: "Opportunities",
@@ -22,6 +23,14 @@ export default function RolesPage() {
             Use your expertise to help train the next generation of AI.
           </p>
         </div>
+        <dl className="max-w-3xl mx-auto mt-14 grid grid-cols-3 border border-hairline bg-paper divide-x divide-hairline">
+          {networkStats.map((s) => (
+            <div key={s.label} className="px-4 py-5 text-center">
+              <dd className="display text-ink text-2xl md:text-3xl mb-1">{s.value}</dd>
+              <dt className="machine text-muted">{s.label}</dt>
+            </div>
+          ))}
+        </dl>
       </section>
 
       {/* Board */}

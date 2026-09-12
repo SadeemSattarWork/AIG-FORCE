@@ -6,6 +6,13 @@ import { motion, useReducedMotion } from "framer-motion";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
+const audiences = [
+  { href: "/contact", label: "Start hiring", sub: "A ranked shortlist within 48 hours" },
+  { href: "/for-experts/roles", label: "Find work", sub: "Open roles for domain experts" },
+  { href: "/experts", label: "Explore expertise", sub: "Five domains, verified depth" },
+  { href: "/#pipeline", label: "How it works", sub: "Application to offer in five stages" },
+];
+
 export function HeroSection() {
   const reduce = useReducedMotion();
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -82,7 +89,8 @@ export function HeroSection() {
       />
 
       {/* Content — anchored low-left, editorial */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 flex flex-col justify-end pb-20 md:pb-28">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-10 items-end pb-20 md:pb-28">
+       <div className="lg:col-span-8 flex flex-col justify-end">
         <motion.p {...fadeIn(0.15)} className="eyebrow text-white/70 mb-6">
           Intelligent recruitment, résumé to offer
         </motion.p>
@@ -114,6 +122,24 @@ export function HeroSection() {
             Join as an expert <span className="arrow">↗</span>
           </Link>
         </motion.div>
+       </div>
+
+        {/* Audience rows: one line per reason to be here, hairline reveals on hover */}
+        <ul className="hidden lg:block lg:col-span-4 border-t border-white/20">
+          {audiences.map((a, i) => (
+            <motion.li key={a.href} {...fadeIn(0.6 + i * 0.08)} className="border-b border-white/20">
+              <Link href={a.href} className="group flex items-center justify-between gap-4 py-4">
+                <span>
+                  <span className="block text-white text-lg group-hover:translate-x-1 transition-transform duration-300 ease-out">
+                    {a.label}
+                  </span>
+                  <span className="block text-white/50 text-xs mt-0.5">{a.sub}</span>
+                </span>
+                <span className="text-white/40 group-hover:text-white transition-colors" aria-hidden="true">↗</span>
+              </Link>
+            </motion.li>
+          ))}
+        </ul>
       </div>
     </section>
   );

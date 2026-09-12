@@ -3,18 +3,13 @@ import Link from "next/link";
 import { domains } from "@/lib/domains";
 import { PageHero } from "@/components/shared/PageHero";
 import { CTABanner } from "@/components/shared/CTABanner";
+import { StageSections } from "@/components/public/companies/StageSections";
 
 export const metadata: Metadata = {
   title: "Hire Elite Domain Experts",
   description:
     "AIG Force connects companies with rigorously vetted specialists across Biology, Software Engineering, Legal, Medical, and Finance. Get matched within 48 hours.",
 };
-
-const steps = [
-  { number: "01", title: "Submit your brief", description: "Tell us the domain, scope, seniority, and timeline. Intake takes under five minutes." },
-  { number: "02", title: "The pipeline runs", description: "Our ATS screens the network against your brief and our AI interviewer scores every candidate on one rubric." },
-  { number: "03", title: "Hire from a ranked shortlist", description: "You receive the strongest candidates within 48 hours, each with an evidence-backed scorecard. You make the call." },
-];
 
 const valuePoints = [
   { title: "Rigorous vetting", description: "Every expert passes a multi-stage assessment of domain knowledge, prior work, and references before joining the network." },
@@ -36,36 +31,11 @@ export default function ForCompaniesPage() {
         lede="Stop settling for generalists. AIG Force runs your entire hiring pipeline, from screening to AI interviews to scorecards, and hands you a ranked shortlist of proven specialists."
       />
 
-      {/* Process */}
+      {/* Process: one section per stage */}
       <section className="bg-paper px-6 py-20 md:py-28">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8">
-          <div className="md:col-span-3">
-            <p className="eyebrow text-blue md:sticky md:top-32">Process</p>
-          </div>
-          <div className="md:col-span-9 lg:col-span-8">
-            <ol>
-              {steps.map((step, i) => (
-                <li
-                  key={step.number}
-                  className={
-                    i === steps.length - 1
-                      ? "py-8 md:py-10"
-                      : "py-8 md:py-10 border-b border-hairline"
-                  }
-                >
-                  <div className="flex items-baseline gap-5 mb-3">
-                    <span className="machine text-muted">{step.number}</span>
-                    <h3 className="display text-ink text-2xl md:text-3xl">{step.title}</h3>
-                  </div>
-                  <div className="sm:pl-12">
-                    <p className="text-sm md:text-base text-muted leading-relaxed max-w-xl">
-                      {step.description}
-                    </p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </div>
+        <div className="max-w-7xl mx-auto">
+          <p className="eyebrow text-blue mb-16 md:mb-24">Process</p>
+          <StageSections />
         </div>
       </section>
 

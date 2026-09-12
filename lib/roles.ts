@@ -12,6 +12,9 @@ export type Role = {
   summary: string;
   scope: string[];
   qualifications: string[];
+  /** Social proof on the card; deterministic per slug so it never flickers. */
+  hiredRecently: number;
+  avatars: string[];
 };
 
 const PAY_MIN = 20;
@@ -48,6 +51,18 @@ function qualsFor(field: string, degree: string): string[] {
    display string, so no runtime date call is needed. */
 const POSTED = "Jul 2, 2026";
 
+const INITIALS = ["RK", "AO", "MS", "JP", "LN", "TB", "SA", "DV", "HK", "EM"];
+function hashOf(slug: string): number {
+  return [...slug].reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 7);
+}
+function hiredFor(slug: string): number {
+  return 9 + (hashOf(slug) % 34); // 9 to 42
+}
+function avatarsFor(slug: string): string[] {
+  const h = hashOf(slug);
+  return [0, 1, 2].map((i) => INITIALS[(h + i * 3) % INITIALS.length]);
+}
+
 type Seed = {
   slug: string;
   title: string;
@@ -67,16 +82,16 @@ const seeds: Seed[] = [
     field: "mathematics",
     degree: "Mathematics or Applied Mathematics",
     skills: [
-      "advanced mathematics",
-      "mathematical proof writing",
-      "technical report writing",
-      "data annotation",
-      "mathematical problem-solving",
-      "clarity in written and verbal communication",
-      "reviewing mathematical reasoning",
-      "collaborative remote teamwork",
-      "translating complex concepts for varied audiences",
-      "independent work and self-management",
+      "Advanced mathematics",
+      "Mathematical proof writing",
+      "Technical report writing",
+      "Data annotation",
+      "Mathematical problem-solving",
+      "Clarity in written and verbal communication",
+      "Reviewing mathematical reasoning",
+      "Collaborative remote teamwork",
+      "Translating complex concepts for varied audiences",
+      "Independent work and self-management",
     ],
   },
   {
@@ -87,14 +102,14 @@ const seeds: Seed[] = [
     field: "physics",
     degree: "Physics or Applied Physics",
     skills: [
-      "physics domain expertise",
-      "data analysis",
-      "experimental design",
-      "technical report writing",
-      "mathematical modeling",
-      "reviewing scientific reasoning",
-      "collaborative remote teamwork",
-      "independent work and self-management",
+      "Physics domain expertise",
+      "Data analysis",
+      "Experimental design",
+      "Technical report writing",
+      "Mathematical modeling",
+      "Reviewing scientific reasoning",
+      "Collaborative remote teamwork",
+      "Independent work and self-management",
     ],
   },
   {
@@ -105,13 +120,13 @@ const seeds: Seed[] = [
     field: "chemistry",
     degree: "Chemistry or Chemical Engineering",
     skills: [
-      "chemistry domain expertise",
-      "experimental write-ups",
-      "technical analysis",
-      "data annotation",
-      "reviewing scientific reasoning",
-      "clarity in written and verbal communication",
-      "collaborative remote teamwork",
+      "Chemistry domain expertise",
+      "Experimental write-ups",
+      "Technical analysis",
+      "Data annotation",
+      "Reviewing scientific reasoning",
+      "Clarity in written and verbal communication",
+      "Collaborative remote teamwork",
     ],
   },
   {
@@ -122,13 +137,13 @@ const seeds: Seed[] = [
     field: "biology",
     degree: "Biology, Molecular Biology, or Life Sciences",
     skills: [
-      "scientific writing",
-      "biological data analysis",
-      "academic research",
-      "data annotation",
-      "reviewing scientific reasoning",
-      "clarity in written and verbal communication",
-      "independent work and self-management",
+      "Scientific writing",
+      "Biological data analysis",
+      "Academic research",
+      "Data annotation",
+      "Reviewing scientific reasoning",
+      "Clarity in written and verbal communication",
+      "Independent work and self-management",
     ],
   },
   {
@@ -139,17 +154,17 @@ const seeds: Seed[] = [
     field: "computer science",
     degree: "Computer Science or Software Engineering",
     skills: [
-      "technical writing",
-      "system design",
-      "algorithms",
-      "data structures",
-      "code review",
-      "reviewing technical reasoning",
-      "collaborative remote teamwork",
-      "independent work and self-management",
-      "clarity in written and verbal communication",
-      "problem decomposition",
-      "translating complex concepts for varied audiences",
+      "Technical writing",
+      "System design",
+      "Algorithms",
+      "Data structures",
+      "Code review",
+      "Reviewing technical reasoning",
+      "Collaborative remote teamwork",
+      "Independent work and self-management",
+      "Clarity in written and verbal communication",
+      "Problem decomposition",
+      "Translating complex concepts for varied audiences",
     ],
   },
   {
@@ -160,13 +175,13 @@ const seeds: Seed[] = [
     field: "software engineering",
     degree: "Computer Science or Software Engineering",
     skills: [
-      "full-stack development",
-      "system design",
-      "code review",
-      "technical documentation",
-      "debugging and analysis",
-      "collaborative remote teamwork",
-      "independent work and self-management",
+      "Full-stack development",
+      "System design",
+      "Code review",
+      "Technical documentation",
+      "Debugging and analysis",
+      "Collaborative remote teamwork",
+      "Independent work and self-management",
     ],
   },
   {
@@ -177,13 +192,13 @@ const seeds: Seed[] = [
     field: "machine learning",
     degree: "Computer Science, Machine Learning, or a related field",
     skills: [
-      "machine learning",
-      "model evaluation",
-      "data annotation",
-      "technical writing",
-      "reviewing model outputs",
-      "experimental design",
-      "collaborative remote teamwork",
+      "Machine learning",
+      "Model evaluation",
+      "Data annotation",
+      "Technical writing",
+      "Reviewing model outputs",
+      "Experimental design",
+      "Collaborative remote teamwork",
     ],
   },
   {
@@ -194,12 +209,12 @@ const seeds: Seed[] = [
     field: "engineering",
     degree: "Engineering or a closely related field",
     skills: [
-      "engineering documentation analysis",
-      "technical report writing",
-      "written and verbal communication",
-      "data annotation",
-      "reviewing technical reasoning",
-      "collaborative remote teamwork",
+      "Engineering documentation analysis",
+      "Technical report writing",
+      "Written and verbal communication",
+      "Data annotation",
+      "Reviewing technical reasoning",
+      "Collaborative remote teamwork",
     ],
   },
   {
@@ -210,13 +225,13 @@ const seeds: Seed[] = [
     field: "law",
     degree: "Law (JD, LLB, or LLM) or a related field",
     skills: [
-      "legal research",
-      "legal writing",
-      "contract analysis",
-      "regulatory compliance",
-      "reviewing legal reasoning",
-      "clarity in written and verbal communication",
-      "independent work and self-management",
+      "Legal research",
+      "Legal writing",
+      "Contract analysis",
+      "Regulatory compliance",
+      "Reviewing legal reasoning",
+      "Clarity in written and verbal communication",
+      "Independent work and self-management",
     ],
   },
   {
@@ -227,13 +242,13 @@ const seeds: Seed[] = [
     field: "medicine",
     degree: "Medicine (MD, MBBS) or a related clinical field",
     skills: [
-      "clinical knowledge",
-      "medical writing",
-      "literature review",
-      "data annotation",
-      "reviewing medical reasoning",
-      "clarity in written and verbal communication",
-      "collaborative remote teamwork",
+      "Clinical knowledge",
+      "Medical writing",
+      "Literature review",
+      "Data annotation",
+      "Reviewing medical reasoning",
+      "Clarity in written and verbal communication",
+      "Collaborative remote teamwork",
     ],
   },
   {
@@ -244,13 +259,13 @@ const seeds: Seed[] = [
     field: "finance",
     degree: "Finance, Economics, or a quantitative field",
     skills: [
-      "financial analysis",
-      "quantitative reasoning",
-      "financial modeling",
-      "technical report writing",
-      "reviewing quantitative reasoning",
-      "clarity in written and verbal communication",
-      "independent work and self-management",
+      "Financial analysis",
+      "Quantitative reasoning",
+      "Financial modeling",
+      "Technical report writing",
+      "Reviewing quantitative reasoning",
+      "Clarity in written and verbal communication",
+      "Independent work and self-management",
     ],
   },
   {
@@ -261,12 +276,12 @@ const seeds: Seed[] = [
     field: "economics",
     degree: "Economics or a quantitative social science",
     skills: [
-      "economic analysis",
-      "data analysis",
-      "academic research",
-      "technical writing",
-      "reviewing quantitative reasoning",
-      "collaborative remote teamwork",
+      "Economic analysis",
+      "Data analysis",
+      "Academic research",
+      "Technical writing",
+      "Reviewing quantitative reasoning",
+      "Collaborative remote teamwork",
     ],
   },
 ];
@@ -279,6 +294,8 @@ export const roles: Role[] = seeds.map((seed) => ({
   posted: POSTED,
   payMin: PAY_MIN,
   payMax: PAY_MAX,
+  hiredRecently: hiredFor(seed.slug),
+  avatars: avatarsFor(seed.slug),
   roleType: "Contractor",
   location: "Remote",
   skills: seed.skills,

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { domains } from "@/lib/domains";
 import { PageHero } from "@/components/shared/PageHero";
 import { CTABanner } from "@/components/shared/CTABanner";
+import { StoriesStrip } from "@/components/public/experts/StoriesStrip";
 
 export const metadata: Metadata = {
   title: "Join as a Domain Expert",
@@ -127,6 +128,8 @@ export default function ForExpertsPage() {
           </div>
         </div>
       </section>
+
+      <StoriesStrip bg="bg-bone" />
 
       <CTABanner
         heading="Ready to join the network?"

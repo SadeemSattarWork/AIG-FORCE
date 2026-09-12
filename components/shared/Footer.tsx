@@ -39,7 +39,7 @@ export function Footer() {
           />
         </Link>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-12 mb-20">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-12 mb-20">
           {/* Solutions */}
           <div>
             <h3 className="eyebrow text-white/40 mb-6">Solutions</h3>
@@ -91,13 +91,6 @@ export function Footer() {
             </ul>
           </div>
 
-          <div className="md:text-right md:flex md:flex-col md:items-end md:justify-between">
-            <p className="text-sm text-white/40 leading-relaxed max-w-[16rem] md:ml-auto">
-              The world&apos;s best specialists, vetted by people who know
-              their field. Five domains, 60+ countries, a ranked shortlist
-              in 48 hours.
-            </p>
-          </div>
         </div>
 
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
