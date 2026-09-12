@@ -37,7 +37,7 @@ const sections: LegalSection[] = [
     heading: "AI-assisted assessment",
     paras: [
       "Our pipeline uses automated screening and structured, role-specific AI interviews, scoring every candidate against the same rubric. By applying you agree to be assessed this way, and you agree that we may record and transcribe the interview for that purpose.",
-      "Assessment outputs inform our decisions and are reviewed by a person before any candidate is rejected or put forward. You may request a human review or contest an outcome — see our privacy notice for how.",
+      "Assessment outputs inform our decisions and are reviewed by a person before any candidate is rejected or put forward. You may request a human review or contest an outcome. see our privacy notice for how.",
     ],
   },
   {
