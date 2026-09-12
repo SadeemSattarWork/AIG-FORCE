@@ -133,7 +133,6 @@ export default function TermsPage() {
           Terms of <em>service.</em>
         </>
       }
-      updated="11 September 2026"
       intro="The terms on which experts and companies use the AIG Force platform, including how introductions, rates and confidentiality work."
       sections={sections}
     />

@@ -235,7 +235,6 @@ export default function PrivacyPage() {
           Privacy &amp; <em>cookies.</em>
         </>
       }
-      updated="11 September 2026"
       intro="What we collect when you contact us or apply through AIG Force, what we do with it, who sees it, and the control you keep over it."
       sections={sections}
     />

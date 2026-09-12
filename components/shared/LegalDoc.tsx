@@ -11,26 +11,20 @@ export type LegalSection = {
 
 type Props = {
   title: React.ReactNode;
-  updated: string;
   intro: string;
   sections: LegalSection[];
 };
 
 /* Shared shell for /privacy and /terms, same editorial grid as the rest of
    the site, with the revision date parked in the sticky left column. */
-export function LegalDoc({ title, updated, intro, sections }: Props) {
+export function LegalDoc({ title, intro, sections }: Props) {
   return (
     <>
       <PageHero eyebrow="Legal" title={title} lede={intro} />
 
       <section className="bg-paper px-6 py-20 md:py-28">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8">
-          <div className="md:col-span-3">
-            <div className="md:sticky md:top-32">
-              <p className="eyebrow text-muted mb-3">Last updated</p>
-              <p className="machine text-ink">{updated}</p>
-            </div>
-          </div>
+          <div className="md:col-span-3" />
 
           <div className="md:col-span-9 lg:col-span-8">
             <ol className="counter-reset">
