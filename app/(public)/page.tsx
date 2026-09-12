@@ -6,6 +6,7 @@ import { ExpertiseAccordion } from "@/components/public/home/ExpertiseAccordion"
 import { SolutionsPanel } from "@/components/public/home/SolutionsPanel";
 import { InsightsGrid } from "@/components/public/home/InsightsGrid";
 import { PreFooterCTA } from "@/components/public/home/PreFooterCTA";
+import { StoriesStrip } from "@/components/public/experts/StoriesStrip";
 
 export const metadata: Metadata = {
   title: { absolute: "AIG Force | Intelligent Hiring for a Changing Workforce" },
@@ -19,6 +20,7 @@ export default function HomePage() {
       <Pipeline />
       <ExpertiseAccordion />
       <SolutionsPanel />
+      <StoriesStrip />
       <InsightsGrid />
       <PreFooterCTA />
     </>

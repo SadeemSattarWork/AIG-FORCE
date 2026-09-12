@@ -6,6 +6,9 @@ import { useState, useEffect } from "react";
 import { Menu, X, ChevronDown, Mail } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { domains } from "@/lib/domains";
+import { insights } from "@/lib/insights";
+import { roles } from "@/lib/roles";
+import { InsightCover } from "@/components/public/insights/InsightCover";
 import { SUPPORT_EMAIL } from "@/lib/site";
 
 type MenuKey = "solutions" | "expertise" | null;
@@ -80,8 +83,9 @@ export function Navbar() {
               />
             </button>
             {openDropdown === "solutions" && (
-              <div className="absolute top-full left-0 pt-2 w-56">
-                <div className="bg-white border border-hairline shadow-[0_16px_40px_rgba(14,14,18,0.08)] py-2">
+              <div className="absolute top-full left-0 pt-2 w-[34rem]">
+                <div className="bg-white border border-hairline shadow-[0_16px_40px_rgba(14,14,18,0.08)] grid grid-cols-[13rem_1fr]">
+                <div className="py-2 border-r border-hairline">
                   {solutionsLinks.map((link) => (
                     <Link
                       key={link.href}
@@ -92,6 +96,12 @@ export function Navbar() {
                       {link.label}
                     </Link>
                   ))}
+                </div>
+                <Link href={`/for-experts/roles/${roles[0].slug}`} onClick={() => setOpenDropdown(null)} className="group block p-5 hover:bg-bone transition-colors">
+                  <p className="eyebrow text-muted mb-3">Open now</p>
+                  <p className="display text-ink text-lg leading-snug group-hover:text-blue transition-colors mb-1">{roles[0].title}</p>
+                  <p className="machine text-muted">{roles[0].roleType} · {roles[0].location}</p>
+                </Link>
                 </div>
               </div>
             )}
@@ -120,8 +130,9 @@ export function Navbar() {
               />
             </button>
             {openDropdown === "expertise" && (
-              <div className="absolute top-full left-0 pt-2 w-64">
-                <div className="bg-white border border-hairline shadow-[0_16px_40px_rgba(14,14,18,0.08)] py-2">
+              <div className="absolute top-full left-0 pt-2 w-[36rem]">
+                <div className="bg-white border border-hairline shadow-[0_16px_40px_rgba(14,14,18,0.08)] grid grid-cols-[15rem_1fr]">
+                <div className="py-2 border-r border-hairline">
                   {domains.map((domain) => (
                     <Link
                       key={domain.slug}
@@ -141,6 +152,12 @@ export function Navbar() {
                       All expertise →
                     </Link>
                   </div>
+                </div>
+                <Link href={`/insights/${insights[0].slug}`} onClick={() => setOpenDropdown(null)} className="group block p-5 hover:bg-bone transition-colors">
+                  <p className="eyebrow text-muted mb-3">Latest insight</p>
+                  <InsightCover insight={insights[0]} index={0} />
+                  <p className="display text-ink text-base leading-snug group-hover:text-blue transition-colors mt-3">{insights[0].title}</p>
+                </Link>
                 </div>
               </div>
             )}

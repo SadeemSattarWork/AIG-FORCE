@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { type Role, formatPay } from "@/lib/roles";
+import { AvatarCluster } from "@/components/shared/AvatarCluster";
 
 const VISIBLE_SKILLS = 3;
 
@@ -46,9 +47,13 @@ export function RoleCard({ role, index = 0 }: { role: Role; index?: number }) {
         </div>
 
         <div className="mt-auto flex items-end justify-between gap-4">
-          <p className="text-sm font-semibold text-ink">
-            Pay: {formatPay(role)}
-          </p>
+          <div>
+            <p className="text-sm font-semibold text-ink mb-2">{formatPay(role)}</p>
+            <p className="flex items-center gap-2 machine text-muted">
+              <AvatarCluster initials={role.avatars} />
+              {role.hiredRecently} hired recently
+            </p>
+          </div>
           <span
             className="w-11 h-11 border border-hairline flex items-center justify-center text-ink group-hover:border-blue group-hover:text-blue transition-colors"
             aria-hidden="true"

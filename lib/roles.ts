@@ -12,6 +12,9 @@ export type Role = {
   summary: string;
   scope: string[];
   qualifications: string[];
+  /** Social proof on the card; deterministic per slug so it never flickers. */
+  hiredRecently: number;
+  avatars: string[];
 };
 
 const PAY_MIN = 20;
@@ -47,6 +50,18 @@ function qualsFor(field: string, degree: string): string[] {
 /* All roles are posted on the same board date; the site treats "posted" as a
    display string, so no runtime date call is needed. */
 const POSTED = "Jul 2, 2026";
+
+const INITIALS = ["RK", "AO", "MS", "JP", "LN", "TB", "SA", "DV", "HK", "EM"];
+function hashOf(slug: string): number {
+  return [...slug].reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 7);
+}
+function hiredFor(slug: string): number {
+  return 9 + (hashOf(slug) % 34); // 9 to 42
+}
+function avatarsFor(slug: string): string[] {
+  const h = hashOf(slug);
+  return [0, 1, 2].map((i) => INITIALS[(h + i * 3) % INITIALS.length]);
+}
 
 type Seed = {
   slug: string;
@@ -279,6 +294,8 @@ export const roles: Role[] = seeds.map((seed) => ({
   posted: POSTED,
   payMin: PAY_MIN,
   payMax: PAY_MAX,
+  hiredRecently: hiredFor(seed.slug),
+  avatars: avatarsFor(seed.slug),
   roleType: "Contractor",
   location: "Remote",
   skills: seed.skills,
